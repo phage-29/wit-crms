@@ -98,6 +98,7 @@ require_once "components/header.php";
                                                 <option value="Convicted">Convicted</option>
                                                 <option value="Acquitted">Acquitted</option>
                                                 <option value="Dismissed">Dismissed</option>
+                                                <option value="Archived">Archived</option>
                                             </select>
                                         </div>
                                         <div class="mb-3 row">
@@ -304,7 +305,7 @@ require_once "components/header.php";
             <footer class="sticky-footer bg-white">
                 <div class="container my-auto">
                     <div class="copyright text-center my-auto">
-                        <span>Copyright &copy; Your Website 2020</span>
+                        <span>Copyright &copy; <?= $website ?> 2020</span>
                     </div>
                 </div>
             </footer>

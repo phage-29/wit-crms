@@ -1,8 +1,7 @@
 <?php
 $servername = "localhost";
 $username = "root";
-$password = "DTIRegion6!+";
-// $password = "";
+$password = "";
 $database = "hojdb";
 
 $conn = new mysqli($servername, $username, $password, $database);
