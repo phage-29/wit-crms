@@ -148,6 +148,7 @@ require_once "components/header.php";
                                                 <option value="Convicted">Convicted</option>
                                                 <option value="Acquitted">Acquitted</option>
                                                 <option value="Dismissed">Dismissed</option>
+                                                <option value="Archived">Archived</option>
                                             </select>
                                         </div>
                                         <div class="mb-3">

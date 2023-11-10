@@ -38,7 +38,7 @@ CREATE TABLE `accused` (
   `Occupation` varchar(255) DEFAULT NULL,
   `Notes` text,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -47,7 +47,6 @@ CREATE TABLE `accused` (
 
 LOCK TABLES `accused` WRITE;
 /*!40000 ALTER TABLE `accused` DISABLE KEYS */;
-INSERT INTO `accused` VALUES (5,'61859499','Dan Alfrei','Celestial','Fuerte','male','2000-09-29','091234567891','dace.phage@gmail.com','Iloilo City',NULL,NULL,NULL,NULL);
 /*!40000 ALTER TABLE `accused` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -82,7 +81,7 @@ CREATE TABLE `cases` (
   KEY `cases_accused_idx` (`AccusedID`),
   KEY `cases_violations_idx` (`ViolationID`),
   KEY `cases_author_idx` (`AuthorID`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -91,7 +90,6 @@ CREATE TABLE `cases` (
 
 LOCK TABLES `cases` WRITE;
 /*!40000 ALTER TABLE `cases` DISABLE KEYS */;
-INSERT INTO `cases` VALUES (2,'23-112797',NULL,'This incident is filed during den',18,5,29,NULL,NULL,'Filed',NULL,NULL,NULL,NULL,NULL,NULL,NULL,'2023-11-09 13:21:39','2023-11-09 22:38:22'),(3,'23-170239',NULL,'asdasdasdasd',18,5,31,NULL,NULL,'Closed',NULL,NULL,NULL,NULL,NULL,NULL,NULL,'2023-11-09 13:44:24','2023-11-09 13:48:26');
 /*!40000 ALTER TABLE `cases` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -109,10 +107,8 @@ CREATE TABLE `documents` (
   `FilePath` varchar(255) NOT NULL,
   `CaseNum` int DEFAULT NULL,
   `CreatedAt` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
-  PRIMARY KEY (`id`),
-  KEY `documents_cases_idx` (`CaseNum`),
-  CONSTRAINT `documents_cases` FOREIGN KEY (`CaseNum`) REFERENCES `cases` (`id`) ON DELETE SET NULL ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -121,7 +117,6 @@ CREATE TABLE `documents` (
 
 LOCK TABLES `documents` WRITE;
 /*!40000 ALTER TABLE `documents` DISABLE KEYS */;
-INSERT INTO `documents` VALUES (1,'asdasda','sadasd','uploads/654ce53576143',NULL,'2023-11-09 13:57:09'),(4,'evidences','asdasd','uploads/654ce848d070c.csv',2,'2023-11-09 14:10:16');
 /*!40000 ALTER TABLE `documents` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -149,7 +144,7 @@ CREATE TABLE `users` (
   UNIQUE KEY `Username_UNIQUE` (`Username`),
   KEY `idx_Username` (`Username`),
   KEY `idx_Email` (`Email`)
-) ENGINE=InnoDB AUTO_INCREMENT=31 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=32 DEFAULT CHARSET=utf8mb4;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -158,7 +153,7 @@ CREATE TABLE `users` (
 
 LOCK TABLES `users` WRITE;
 /*!40000 ALTER TABLE `users` DISABLE KEYS */;
-INSERT INTO `users` VALUES (18,'Dan Alfrei','Celestial','Fuerte','dace.phage@gmail.com','tiny','$2y$10$QAR0Z4mTsK8cFG9aimPPEOtxDpy23zTI6iRI.96jq0wr6jgenSobm','Active','Admin','2023-10-27 14:53:34',NULL),(25,'Scottie','Magboo','Mupadas','itzmescottie26@gmail.com','juan123','$2y$10$xq9.jGWvHnyeWSKbcIM0duMoR9JIMKnatxSYLIr8Eod7ubMlKSlrq','Active','Operator','2023-10-29 05:17:39',NULL),(27,'Dan Alfrei','Celestial','Fuerte','dace.fuerte@gmail.com','user123','$2y$10$OYWf6LryPgkGzvwqtZGyNu0VbtxpmAIAn1k6.5/Xa0KjlsjQB4792','Active','Operator','2023-11-03 08:19:55','6544AD2A'),(30,'Dan Alfrei','Celestials','Brofar','dace.fuerte.ui@phinmaed.com','admin','$2y$10$KApAcjgBRQpIYuXC.o.95.k3teZA6hWLbY3oBauUYuhsXa5ThmSui','Active','Admin','2023-11-09 22:07:47','654D5833');
+INSERT INTO `users` VALUES (18,'Juan','D.','Dela Cruz','admin@gmail.com','admin','$2y$10$nILI2nTmJ8t0xcMFGusyBu9fts/dB9XYwtNNZME7eQY3lN82rl7.K','Active','Admin','2023-10-27 14:53:34',NULL);
 /*!40000 ALTER TABLE `users` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -176,7 +171,7 @@ CREATE TABLE `violations` (
   `Violation` varchar(255) NOT NULL,
   `Description` text,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=54 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=54 DEFAULT CHARSET=utf8mb4;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -198,4 +193,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2023-11-10  7:57:13
+-- Dump completed on 2023-11-10  9:24:39

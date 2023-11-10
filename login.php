@@ -25,17 +25,21 @@ require_once "components/header.php";
                                     </div>
                                     <form class="user" action="includes/process.php" method="POST">
                                         <div class="form-group">
-                                            <input type="text" class="form-control form-control-user" id="Username" name="Username" placeholder="Enter Username...">
+                                            <input type="text" class="form-control form-control-user" id="Username"
+                                                name="Username" placeholder="Enter Username...">
                                         </div>
                                         <div class="form-group">
-                                            <input type="password" class="form-control form-control-user password" id="Password" name="Password" placeholder="Password">
+                                            <input type="password" class="form-control form-control-user password"
+                                                id="Password" name="Password" placeholder="Password">
                                         </div>
                                         <div class="form-group">
                                             <div class="custom-control custom-checkbox small">
                                                 <input type="checkbox" class="custom-control-input" id="showPassword">
-                                                <label class="custom-control-label" for="showPassword">Show Password</label>
+                                                <label class="custom-control-label" for="showPassword">Show
+                                                    Password</label>
                                             </div>
-                                        </div><input type="hidden" name="Login" />
+                                        </div>
+                                        <input type="hidden" name="Login" />
                                         <button type="submit" class="btn btn-primary btn-user btn-block">
                                             Login
                                         </button>
@@ -45,7 +49,7 @@ require_once "components/header.php";
                                         <a class="small" href="password.php">Forgot Password?</a>
                                     </div>
                                     <div class="text-center">
-                                        <a class="small" href="register.php">Create an Account!</a>
+                                        <!-- <a class="small" href="register.php">Create an Account!</a> -->
                                     </div>
                                 </div>
                             </div>
@@ -68,7 +72,18 @@ require_once "components/header.php";
 
     <!-- Custom scripts for all pages-->
     <script src="js/sb-admin-2.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            // Function to toggle password visibility
+            $('#showPassword').change(function () {
+                var passwordField = $('#Password');
+                var passwordFieldType = passwordField.attr('type');
 
+                // Toggle the password field type
+                passwordField.attr('type', passwordFieldType === 'password' ? 'text' : 'password');
+            });
+        });
+    </script>
 </body>
 
 </html>

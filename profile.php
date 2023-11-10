@@ -1,5 +1,5 @@
 <?php
-$page = "Accused Management";
+$page = "Profile";
 $Role = "Admin";
 require_once "includes/session.php";
 require_once "components/header.php";
@@ -26,165 +26,86 @@ require_once "components/header.php";
 
                 <!-- Begin Page Content -->
                 <div class="container-fluid">
+                    <div class="row">
+                        <div class="col-xl-4">
 
-                    <!-- Page Heading -->
-                    <h1 class="h3 mb-2 text-gray-800">Tables</h1>
+                            <div class="card">
+                                <div class="card-body profile-card pt-4 d-flex flex-column align-items-center">
 
-                    <!-- DataTales Example -->
-                    <div class="card shadow mb-4">
-                        <div class="card-header py-3">
-                            <h6 class="m-0 font-weight-bold text-primary">Users Details</h6>
+                                    <img src="img/undraw_profile.svg" width="150px" alt="Profile">
+                                    <hr>
+                                    <h4>
+                                        <?= $acc->FirstName ?>
+                                        <?= $acc->LastName ?>
+                                    </h4>
+                                    <h5>
+                                        <?= $acc->Role ?>
+                                    </h5>
+                                </div>
+                            </div>
+
                         </div>
-                        <div class="card-body">
-                            <p class="text-right">
-                                <button class="btn btn-outline-primary" type="button" data-toggle="collapse" data-target="#collapseAddAccused" aria-expanded="false" aria-controls="collapseAddAccused">
-                                    Add Accused Person
-                                </button>
-                            </p>
-                            <div class="collapse mb-3" id="collapseAddAccused">
-                                <div class="card card-body">
-                                    <form class="user" action="includes/process.php" method="POST">
-                                        <div class="mb-3 row">
-                                            <div class="col-lg-6 col-md-6">
-                                                <label for="FirstName" class="form-label">First Name <span class="text-danger">*</span></label>
-                                                <input type="text" class="form-control" id="FirstName" name="FirstName" value="" required>
+
+                        <div class="col-xl-8">
+
+                            <div class="card">
+                                <div class="card-body pt-3">
+
+                                    <!-- Profile Edit Form -->
+                                    <form action="includes/process.php" method="POST">
+
+                                        <div class="row mb-3">
+                                            <label for="FirstName" class="col-md-4 col-lg-3 col-form-label">First
+                                                Name</label>
+                                            <div class="col-md-8 col-lg-9">
+                                                <input name="FirstName" type="text" class="form-control" id="FirstName"
+                                                    value="<?= $acc->FirstName ?>" required />
                                             </div>
-                                            <div class="col-lg-6 col-md-6">
-                                                <label for="MiddleName" class="form-label">Middle Name</label>
-                                                <input type="text" class="form-control" id="MiddleName" name="MiddleName" value="" required>
-                                            </div>
-                                        </div>
-                                        <div class="mb-3 row">
-                                            <div class="col-lg-6 col-md-6">
-                                                <label for="LastName" class="form-label">Last Name <span class="text-danger">*</span></label>
-                                                <input type="text" class="form-control" id="LastName" name="LastName" value="" required>
-                                            </div>
-                                            <div class="col-lg-6 col-md-6">
-                                                <label for="Sex" class="form-label">Sex <span class="text-danger">*</span></label>
-                                                <select class="custom-select" id="Sex" name="Sex" required>
-                                                    <option value="" selected disabled>--</option>
-                                                    <option value="male">Male</option>
-                                                    <option value="female">Female</option>
-                                                    <option value="other">Other</option>
-                                                </select>
-                                            </div>
-                                        </div>
-                                        <div class="mb-3">
-                                            <label for="DateOfBirth" class="form-label">Date Of Birth <span class="text-danger">*</span></label>
-                                            <input type="date" class="form-control" id="DateOfBirth" name="DateOfBirth" value="" required>
                                         </div>
 
-                                        <div class="mb-3 row">
-                                            <div class="col-lg-6 col-md-6">
-                                                <label for="Contact" class="form-label">Contact <span class="text-danger">*</span></label>
-                                                <input type="text" class="form-control" id="Contact" name="Contact" value="" required>
+                                        <div class="row mb-3">
+                                            <label for="MiddleName" class="col-md-4 col-lg-3 col-form-label">Middle
+                                                Name</label>
+                                            <div class="col-md-8 col-lg-9">
+                                                <input name="MiddleName" type="text" class="form-control"
+                                                    id="MiddleName" value="<?= $acc->MiddleName ?>">
                                             </div>
-                                            <div class="col-lg-6 col-md-6">
-                                                <label for="Email" class="form-label">Email <span class="text-danger">*</span></label>
-                                                <input type="text" class="form-control" id="Email" name="Email" value="" required>
-                                            </div>
-                                        </div>
-                                        <div class="mb-3">
-                                            <label for="Address" class="form-label">Address</label>
-                                            <textarea class="form-control" id="Address" name="Address" required></textarea>
-                                        </div>
-                                        <div class="text-right">
-                                            <input type="hidden" name="AddAccused" />
-                                            <button type="submit" class="btn btn-primary">Submit</button>
-                                        </div>
-                                    </form>
-                                </div>
-                            </div>
-                            <div class="collapse mb-3" id="collapseEditAccused">
-                                <div class="card card-body">
-                                    <form class="user" action="includes/process.php" method="POST">
-                                        <div class="mb-3 row">
-                                            <div class="col-lg-6 col-md-6">
-                                                <label for="FirstName" class="form-label">First Name <span class="text-danger">*</span></label>
-                                                <input type="text" class="form-control" id="FirstName" name="FirstName" value="" required>
-                                            </div>
-                                            <div class="col-lg-6 col-md-6">
-                                                <label for="MiddleName" class="form-label">Middle Name</label>
-                                                <input type="text" class="form-control" id="MiddleName" name="MiddleName" value="" required>
-                                            </div>
-                                        </div>
-                                        <div class="mb-3 row">
-                                            <div class="col-lg-6 col-md-6">
-                                                <label for="LastName" class="form-label">Last Name <span class="text-danger">*</span></label>
-                                                <input type="text" class="form-control" id="LastName" name="LastName" value="" required>
-                                            </div>
-                                            <div class="col-lg-6 col-md-6">
-                                                <label for="Sex" class="form-label">Sex <span class="text-danger">*</span></label>
-                                                <select class="custom-select" id="Sex" name="Sex" required>
-                                                    <option value="" selected disabled>--</option>
-                                                    <option value="male">Male</option>
-                                                    <option value="female">Female</option>
-                                                    <option value="other">Other</option>
-                                                </select>
-                                            </div>
-                                        </div>
-                                        <div class="mb-3">
-                                            <label for="DateOfBirth" class="form-label">Date Of Birth <span class="text-danger">*</span></label>
-                                            <input type="date" class="form-control" id="DateOfBirth" name="DateOfBirth" value="" required>
                                         </div>
 
-                                        <div class="mb-3 row">
-                                            <div class="col-lg-6 col-md-6">
-                                                <label for="Contact" class="form-label">Contact <span class="text-danger">*</span></label>
-                                                <input type="text" class="form-control" id="Contact" name="Contact" value="" required>
-                                            </div>
-                                            <div class="col-lg-6 col-md-6">
-                                                <label for="Email" class="form-label">Email <span class="text-danger">*</span></label>
-                                                <input type="text" class="form-control" id="Email" name="Email" value="" required>
+                                        <div class="row mb-3">
+                                            <label for="LastName" class="col-md-4 col-lg-3 col-form-label">Last
+                                                Name</label>
+                                            <div class="col-md-8 col-lg-9">
+                                                <input name="LastName" type="text" class="form-control" id="LastName"
+                                                    value="<?= $acc->LastName ?>" required />
                                             </div>
                                         </div>
-                                        <div class="mb-3">
-                                            <label for="Address" class="form-label">Address</label>
-                                            <textarea class="form-control" id="Address" name="Address" required></textarea>
+
+                                        <div class="row mb-3">
+                                            <label for="Username"
+                                                class="col-md-4 col-lg-3 col-form-label">Username</label>
+                                            <div class="col-md-8 col-lg-9">
+                                                <input name="Username" type="text" class="form-control" id="Username"
+                                                    value="<?= $acc->Username ?>" required />
+                                            </div>
                                         </div>
+
+                                        <div class="row mb-3">
+                                            <label for="Email" class="col-md-4 col-lg-3 col-form-label">Email</label>
+                                            <div class="col-md-8 col-lg-9">
+                                                <input name="Email" type="email" class="form-control" id="Email"
+                                                    value="<?= $acc->Email ?>" required />
+                                            </div>
+                                        </div>
+
                                         <div class="text-right">
-                                            <input type="hidden" name="id" id="id" />
-                                            <input type="hidden" name="UpdateAccused" />
-                                            <button type="submit" class="btn btn-primary">Update</button>
+                                            <input type="hidden" name="UpdateProfile" />
+                                            <button type="submit" class="btn btn-primary">Save Changes</button>
                                         </div>
-                                    </form>
+                                    </form><!-- End Profile Edit Form -->
                                 </div>
                             </div>
-                            <div class="table-responsive">
-                                <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
-                                    <thead>
-                                        <tr>
-                                            <th>Accused ID</th>
-                                            <th>Name</th>
-                                            <th>Contact</th>
-                                            <th>Email</th>
-                                            <th>Address</th>
-                                            <th>Action</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        <?php
-                                        $query = "SELECT * FROM accused";
-                                        $result = $conn->execute_query($query, []);
-                                        while ($row = $result->fetch_object()) {
-                                        ?>
-                                            <tr>
-                                                <td class="text-center text-nowrap"><?= $row->AccusedID ?></td>
-                                                <td class="text-nowrap"><a class="btn-link" href="#"><?= $row->FirstName ?> <?= $row->LastName ?></a></td>
-                                                <td class="text-nowrap"><?= $row->Contact ?></td>
-                                                <td class="text-nowrap"><?= $row->Email ?></td>
-                                                <td class="text-nowrap"><?= $row->Address ?></td>
-                                                <td class="text-center text-nowrap">
-                                                    <button class='edit-btn btn btn-success btn-sm rounded-0 mx-1' data-editAccused="<?= $row->id ?>" data-toggle="collapse" data-target="#collapseEditAccused" aria-expanded="false" aria-controls="collapseEditAccused"><i class="fas fa-edit"></i></button>
-                                                    <button class='reject-btn btn btn-danger btn-sm rounded-0 mx-1' data-deleteAccused="<?= $row->id ?>"><i class="fas fa-trash"></i></button>
-                                                </td>
-                                            </tr>
-                                        <?php
-                                        }
-                                        ?>
-                                    </tbody>
-                                </table>
-                            </div>
+
                         </div>
                     </div>
 
@@ -213,7 +134,7 @@ require_once "components/header.php";
     require_once "components/footer.php";
     ?>
     <script>
-        $('.edit-btn').click(function() {
+        $('.edit-btn').click(function () {
             var EditAccused = $(this).data('editaccused');
             $.ajax({
                 url: "includes/fetch.php",
@@ -222,7 +143,7 @@ require_once "components/header.php";
                     EditAccused: EditAccused
                 },
                 dataType: "json",
-                success: function(data) {
+                success: function (data) {
                     jQuery('#collapseEditAccused #FirstName').val(data.FirstName);
                     jQuery('#collapseEditAccused #MiddleName').val(data.MiddleName);
                     jQuery('#collapseEditAccused #LastName').val(data.LastName);
@@ -233,12 +154,12 @@ require_once "components/header.php";
                     jQuery('#collapseEditAccused #Address').val(data.Address);
                     jQuery('#collapseEditAccused #id').val(EditAccused);
                 },
-                error: function() {
+                error: function () {
                     alert("Error fetching events from the server.");
                 },
             });
         });
-        $('.reject-btn').click(function() {
+        $('.reject-btn').click(function () {
             var deleteAccusedId = $(this).data('deleteaccused');
             $.ajax({
                 url: "includes/fetch.php",
@@ -247,7 +168,7 @@ require_once "components/header.php";
                     EditAccused: EditAccused
                 },
                 dataType: "json",
-                success: function(data) {
+                success: function (data) {
                     jQuery('#collapseEditAccused #FirstName').val(data.FirstName);
                     jQuery('#collapseEditAccused #MiddleName').val(data.MiddleName);
                     jQuery('#collapseEditAccused #LastName').val(data.LastName);
@@ -258,7 +179,7 @@ require_once "components/header.php";
                     jQuery('#collapseEditAccused #Address').val(data.Address);
                     jQuery('#collapseEditAccused #id').val(data.id);
                 },
-                error: function() {
+                error: function () {
                     alert("Error fetching events from the server.");
                 },
             });

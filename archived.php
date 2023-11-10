@@ -1,5 +1,5 @@
 <?php
-$page = "Case List";
+$page = "Archived List";
 $Role = "Operator";
 require_once "includes/session.php";
 require_once "components/header.php";
@@ -37,9 +37,9 @@ require_once "components/header.php";
                         </div>
                         <div class="card-body">
                             <p class="text-right">
-                                <button class="btn btn-outline-primary" type="button" data-toggle="collapse" data-target="#collapseAddCase" aria-expanded="false" aria-controls="collapseAddCase">
+                                <!-- <button class="btn btn-outline-primary" type="button" data-toggle="collapse" data-target="#collapseAddCase" aria-expanded="false" aria-controls="collapseAddCase">
                                     Add Violation
-                                </button>
+                                </button> -->
                             </p>
                             <div class="collapse mb-3" id="collapseAddCase">
                                 <div class="card card-body">
@@ -191,7 +191,7 @@ require_once "components/header.php";
                                         FROM cases c
                                             LEFT JOIN users u ON c.`AuthorID` = c.id
                                             LEFT JOIN accused a ON c.`AccusedID` = a.id
-                                            LEFT JOIN violations v ON c.`ViolationID` = v.id WHERE c.Status!='Archived'";
+                                            LEFT JOIN violations v ON c.`ViolationID` = v.id WHERE c.Status='Archived'";
                                         $result = $conn->execute_query($query, []);
                                         while ($row = $result->fetch_object()) {
                                         ?>

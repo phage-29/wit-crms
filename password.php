@@ -29,14 +29,14 @@ require_once "components/header.php";
                                         <div class="form-group">
                                             <input type="email" class="form-control form-control-user" id="Email" name="Email" aria-describedby="emailHelp" placeholder="Enter Email Address...">
                                         </div>
-                                        <input type="hidden" name="Password" />
+                                        <input type="hidden" name="ForgotPassword" />
                                         <button type="submit" class="btn btn-primary btn-user btn-block">
                                             Reset Password
                                         </button>
                                     </form>
                                     <hr>
                                     <div class="text-center">
-                                        <a class="small" href="register.php">Create an Account!</a>
+                                        <!-- <a class="small" href="register.php">Create an Account!</a> -->
                                     </div>
                                     <div class="text-center">
                                         <a class="small" href="login.php">Already have an account? Login!</a>

@@ -3,7 +3,9 @@
 
     <!-- Sidebar - Brand -->
     <a class="sidebar-brand d-flex align-items-center justify-content-center" href="index.php">
-        <div class="sidebar-brand-text mx-3"><?= $website ?></div>
+        <div class="sidebar-brand-text mx-3">
+            <?= $website ?>
+        </div>
     </a>
 
     <!-- Divider -->
@@ -11,7 +13,7 @@
 
     <?php
     if (isset($_SESSION["Role"]) && $_SESSION["Role"] == "Admin") {
-    ?>
+        ?>
         <!-- Nav Item - Dashboard -->
         <li class="nav-item">
             <a class="nav-link" href="Admin.php">
@@ -54,10 +56,16 @@
                 <span>Documents</span>
             </a>
         </li>
-    <?php
+        <li class="nav-item">
+            <a class="nav-link" href="managecalendar.php">
+                <i class="fas fa-calendar"></i> <!-- Example icon for Case Management -->
+                <span>Calendar</span>
+            </a>
+        </li>
+        <?php
     }
     if (isset($_SESSION["Role"]) && $_SESSION["Role"] == "Operator") {
-    ?>
+        ?>
         <!-- Nav Item - Dashboard -->
         <li class="nav-item">
             <a class="nav-link" href="Operator.php">
@@ -73,12 +81,31 @@
         </li>
 
         <li class="nav-item">
-            <a class="nav-link" href="manageaccused.php">
+            <a class="nav-link" href="accused.php">
                 <i class="fas fa-users"></i> <!-- Example icon for Accused Management -->
                 <span>Accused List</span>
             </a>
         </li>
-    <?php
+
+        <li class="nav-item">
+            <a class="nav-link" href="documents.php">
+                <i class="fas fa-file"></i> <!-- Example icon for Accused Management -->
+                <span>Documents</span>
+            </a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="archived.php">
+                <i class="fas fa-briefcase"></i> <!-- Example icon for Case Management -->
+                <span>Archived</span>
+            </a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="calendar.php">
+                <i class="fas fa-calendar"></i> <!-- Example icon for Case Management -->
+                <span>Calendar</span>
+            </a>
+        </li>
+        <?php
     }
     ?>
 </ul>

@@ -104,7 +104,7 @@ if (isset($_POST['UpdateProfile'])) {
 
             $response['status'] = 'success';
             $response['message'] = 'Profile Updated!';
-            $response['redirect'] = 'profile.php';
+            $response['redirect'] = '../profile.php';
         } else {
 
             $response['status'] = 'error';
@@ -143,7 +143,7 @@ if (isset($_POST['UpdatePassword'])) {
 
                             $response['status'] = 'success';
                             $response['message'] = 'Password Changed!';
-                            $response['redirect'] = 'profile.php';
+                            $response['redirect'] = '../profile.php';
                         } else {
 
                             $response['status'] = 'error';
@@ -395,11 +395,35 @@ if (isset($_GET['ResetPassword'])) {
         $query2 = "SELECT * FROM users WHERE `id` = ?";
         $result2 = $conn->execute_query($query2, [$_GET['ResetPassword']]);
         while ($row = $result2->fetch_object()) {
-            sendEmail($row->Email, 'HOJ Password Reset Request', "Hello " . $row->FirstName . " " . $row->LastName . ",\n\nWe received a request to reset your password. If you didn't make this request, you can ignore this email. Otherwise, please login using the provided password to reset your previous password:\n\nReset Password: " . $ChangePassword . "\n\nThe password will expire in 24 hours.\n\nIf you have any questions or need further assistance, please don't hesitate to contact us.\n\nThank you for choosing our service!\n\nSincerely, HOJ Admin\nHall of Justice");
+            sendEmail($row->Email, 'HOJ Password Reset Request', "Hello " . $row->FirstName . " " . $row->LastName . ",\n\nWe received a request to reset your password. If you didn't make this request, you can ignore this email. Otherwise, please login using the provided password to reset your previous password:\n\nReset Password: " . $ChangePassword . "\n\nThe password will expire in 120 seconds.\n\nIf you have any questions or need further assistance, please don't hesitate to contact us.\n\nThank you for choosing our service!\n\nSincerely, HOJ Admin\nHall of Justice");
 
             $response['status'] = 'success';
             $response['message'] = 'New User Inserted!';
             $response['redirect'] = '../manageusers.php';
+        }
+    } else {
+
+        $response['status'] = 'error';
+        $response['message'] = 'Adding failed!';
+    }
+}
+
+if (isset($_POST['ForgotPassword'])) {
+    $Email = $conn->real_escape_string($_POST['Email']);
+    $ChangePassword = substr(strtoupper(uniqid()), 0, 8);
+    $HashedPassword = password_hash($ChangePassword, PASSWORD_DEFAULT);
+    $query = "UPDATE users SET `Password` = ?, `ChangePassword` = ? WHERE `Email` = ?";
+    $result = $conn->execute_query($query, [$HashedPassword, $ChangePassword, $Email]);
+
+    if ($result) {
+        $query2 = "SELECT * FROM users WHERE `Email` = ?";
+        $result2 = $conn->execute_query($query2, [$Email]);
+        while ($row = $result2->fetch_object()) {
+            sendEmail($row->Email, 'HOJ Password Reset Request', "Hello " . $row->FirstName . " " . $row->LastName . ",\n\nWe received a request to reset your password. If you didn't make this request, you can ignore this email. Otherwise, please login using the provided password to reset your previous password:\n\nReset Password: " . $ChangePassword . "\n\nThe password will expire in 120 seconds.\n\nIf you have any questions or need further assistance, please don't hesitate to contact us.\n\nThank you for choosing our service!\n\nSincerely, HOJ Admin\nHall of Justice");
+
+            $response['status'] = 'success';
+            $response['message'] = 'Temporary Password Sent!';
+            $response['redirect'] = '../login.php';
         }
     } else {
 

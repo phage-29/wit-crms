@@ -41,7 +41,9 @@ require_once "components/header.php";
                                         <div class="col mr-2">
                                             <div class="text-xs font-weight-bold text-success text-uppercase mb-1">
                                                 Users</div>
-                                            <div class="h5 mb-0 font-weight-bold text-gray-800">$40,000</div>
+                                            <div class="h5 mb-0 font-weight-bold text-gray-800">
+                                                <?= $conn->query("SELECT * FROM users")->num_rows; ?>
+                                            </div>
                                         </div>
                                         <div class="col-auto">
                                             <i class="fas fa-users fa-2x text-gray-300"></i>
@@ -59,7 +61,9 @@ require_once "components/header.php";
                                         <div class="col mr-2">
                                             <div class="text-xs font-weight-bold text-warning text-uppercase mb-1">
                                                 Accused</div>
-                                            <div class="h5 mb-0 font-weight-bold text-gray-800">$215,000</div>
+                                            <div class="h5 mb-0 font-weight-bold text-gray-800">
+                                                <?= $conn->query("SELECT * FROM accused")->num_rows; ?>
+                                            </div>
                                         </div>
                                         <div class="col-auto">
                                             <i class="fas fa-users fa-2x text-gray-300"></i>
@@ -75,9 +79,12 @@ require_once "components/header.php";
                                 <div class="card-body">
                                     <div class="row no-gutters align-items-center">
                                         <div class="col mr-2">
-                                            <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">Active Cases
+                                            <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">
+                                                Active Cases
                                             </div>
-                                            <div class="h5 mb-0 font-weight-bold text-gray-800">18</div>
+                                            <div class="h5 mb-0 font-weight-bold text-gray-800">
+                                                <?= $conn->query("SELECT * FROM cases WHERE status!='Archived'")->num_rows; ?>
+                                            </div>
                                         </div>
                                         <div class="col-auto">
                                             <i class="fas fa-clipboard-list fa-2x text-gray-300"></i>
@@ -95,7 +102,9 @@ require_once "components/header.php";
                                         <div class="col mr-2">
                                             <div class="text-xs font-weight-bold text-danger text-uppercase mb-1">
                                                 Archived Cases</div>
-                                            <div class="h5 mb-0 font-weight-bold text-gray-800">18</div>
+                                            <div class="h5 mb-0 font-weight-bold text-gray-800">
+                                                <?= $conn->query("SELECT * FROM cases WHERE status='Archived'")->num_rows; ?>
+                                            </div>
                                         </div>
                                         <div class="col-auto">
                                             <i class="fas fa-clipboard-list fa-2x text-gray-300"></i>
@@ -110,7 +119,8 @@ require_once "components/header.php";
                         <div class="col-xl-8 col-lg-7">
                             <div class="mb-3">
                                 <label for="caseNo" class="form-label">Case No.:</label>
-                                <input type="text" id="inputCaseNo" onkeyup="findCaseNo()" class="form-control w-50" id="caseNo" />
+                                <input type="text" id="inputCaseNo" onkeyup="findCaseNo()" class="form-control w-50"
+                                    id="caseNo" />
                             </div>
                             <div class="mb-3">
                                 <label for="violation" class="form-label">For:</label>
@@ -128,13 +138,15 @@ require_once "components/header.php";
                         <div class="col-xl-8 col-lg-7">
                             <div class="card shadow mb-4">
                                 <!-- Card Header - Dropdown -->
-                                <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+                                <div
+                                    class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
                                     <h6 class="m-0 font-weight-bold text-primary">Most Recent Cases</h6>
                                 </div>
                                 <!-- Card Body -->
                                 <div class="card-body">
                                     <div class="table-responsive">
-                                        <table class="table table-bordered table-hover" id="caseRecordsTable" style="cursor:pointer" id="dataTable" width="100%" cellspacing="0">
+                                        <table class="table table-bordered table-hover" id="caseRecordsTable"
+                                            style="cursor:pointer" id="dataTable" width="100%" cellspacing="0">
                                             <thead>
                                                 <tr>
                                                     <th class="text-nowrap">Case No</th>
@@ -158,19 +170,36 @@ require_once "components/header.php";
                                                 }
 
                                                 while ($row = $result->fetch_object()) {
-                                                ?>
-                                                    <tr onclick="document.getElementById('Notes').innerHTML = '<?= $row->Notes ?>';document.getElementById('violation').value = '<?= $row->Violation ?>'">
-                                                        <td class="text-nowrap"><?= $row->CaseNo ?></td>
-                                                        <td class="text-nowrap"><?= $row->AccusedID ?></td>
-                                                        <td><?= $row->FirstName ?></td>
-                                                        <td><?= $row->MiddleName ?></td>
-                                                        <td><?= $row->LastName ?></td>
-                                                        <td><?= $row->Case ?></td>
-                                                        <td><?= $row->Violation ?></td>
-                                                        <td><?= $row->Status ?></td>
+                                                    ?>
+                                                    <tr
+                                                        onclick="document.getElementById('Notes').innerHTML = '<?= $row->Notes ?>';document.getElementById('violation').value = '<?= $row->Violation ?>'">
+                                                        <td class="text-nowrap">
+                                                            <?= $row->CaseNo ?>
+                                                        </td>
+                                                        <td class="text-nowrap">
+                                                            <?= $row->AccusedID ?>
+                                                        </td>
+                                                        <td>
+                                                            <?= $row->FirstName ?>
+                                                        </td>
+                                                        <td>
+                                                            <?= $row->MiddleName ?>
+                                                        </td>
+                                                        <td>
+                                                            <?= $row->LastName ?>
+                                                        </td>
+                                                        <td>
+                                                            <?= $row->Case ?>
+                                                        </td>
+                                                        <td>
+                                                            <?= $row->Violation ?>
+                                                        </td>
+                                                        <td>
+                                                            <?= $row->Status ?>
+                                                        </td>
                                                         <!-- <td class="small text-center text-nowrap"><button class="small btn btn-primary" data-toggle="modal" data-target="#modalViolation<?= $row->id ?>">Edit</button> <button class="small btn btn-danger" onclick="location = confirm('Are you sure?') == true?'?deleteViolation=<?= $row->id ?>':'#'">Delete</button></td> -->
                                                     </tr>
-                                                <?php
+                                                    <?php
                                                 }
                                                 ?>
                                             </tbody>
@@ -203,7 +232,8 @@ require_once "components/header.php";
                         <div class="col-xl-4 col-lg-5">
                             <div class="card shadow mb-4">
                                 <!-- Card Header -->
-                                <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+                                <div
+                                    class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
                                     <h6 class="m-0 font-weight-bold text-primary">Notes</h6>
                                 </div>
                                 <!-- Card Body -->
@@ -213,7 +243,54 @@ require_once "components/header.php";
                             </div>
                         </div>
                     </div>
+                    <div class="card shadow mb-4">
+                        <!-- Card Header -->
+                        <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+                            <h6 class="m-0 font-weight-bold text-primary">Calendar</h6>
+                        </div>
+                        <!-- Card Body -->
+                        <div class="card-body" id="Notes">
+                            <script>
+                                document.addEventListener('DOMContentLoaded', function () {
+                                    var calendarEl = document.getElementById('calendar');
 
+                                    var calendar = new FullCalendar.Calendar(calendarEl, {
+                                        initialDate: '<?= date('Y-m-d') ?>',
+                                        initialView: 'dayGridMonth',
+                                        headerToolbar: {
+                                            left: 'prev,next today',
+                                            center: 'title',
+                                            right: 'dayGridMonth,dayGridWeek'
+                                        },
+                                        height: 'auto',
+                                        navLinks: true, // can click day/week names to navigate views
+                                        editable: true,
+                                        selectable: true,
+                                        selectMirror: true,
+                                        nowIndicator: true,
+                                        events: [
+                                            <?php
+                                            $result = $conn->query("SELECT * FROM cases");
+                                            while ($row = $result->fetch_object()) {
+                                                ?>
+                                                {
+                                                    title: '<?= $row->CaseNo ?>',
+                                                    start: '<?= $row->CreatedAt ?>',
+                                                },
+                                                <?php
+                                            }
+                                            ?>
+
+                                        ]
+                                    });
+
+                                    calendar.render();
+                                });
+
+                            </script>
+                            <div id='calendar'></div>
+                        </div>
+                    </div>
                 </div>
                 <!-- /.container-fluid -->
 
