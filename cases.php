@@ -89,6 +89,26 @@ require_once "components/header.php";
                                                 <option value="Dismissed">Dismissed</option>
                                             </select>
                                         </div>
+                                        
+                                        <div class="mb-3 row">
+                                            <!-- ... existing code ... -->
+                                            <div class="col-lg-6 col-md-6">
+                                                <label class="form-label">Trial Date</label>
+                                                <input type="date" class="form-control" name="TrialDate">
+                                            </div>
+                                            <div class="col-lg-6 col-md-6">
+                                                <label class="form-label">Hearing Date</label>
+                                                <input type="date" class="form-control" name="HearingDate">
+                                            </div>
+                                        </div>
+                                        <div class="mb-3">
+                                            <label class="form-label">Verdict</label>
+                                            <input type="text" class="form-control" name="Verdict">
+                                        </div>
+                                        <div class="mb-3">
+                                            <label class="form-label">Sentence</label>
+                                            <input type="text" class="form-control" name="Sentence">
+                                        </div>
                                         <div class="mb-3">
                                             <label class="form-label">Notes</label>
                                             <textarea class="form-control" name="Description" required></textarea>

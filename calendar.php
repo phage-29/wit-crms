@@ -62,7 +62,7 @@ require_once "components/header.php";
                                                 ?>
                                                 {
                                                     title: '<?= $row->CaseNo ?>',
-                                                    start: '<?= $row->CreatedAt ?>',
+                                                    start: '<?= $row->HearingDate ?>',
                                                 },
                                                 <?php
                                             }

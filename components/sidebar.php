@@ -57,8 +57,14 @@
             </a>
         </li>
         <li class="nav-item">
+            <a class="nav-link" href="managearchived.php">
+                <i class="fas fa-briefcase"></i> <!-- Example icon for Case Management -->
+                <span>Archived</span>
+            </a>
+        </li>
+        <li class="nav-item">
             <a class="nav-link" href="managecalendar.php">
-                <i class="fas fa-calendar"></i> <!-- Example icon for Case Management -->
+                <i class="fas fa-calendar"></i>
                 <span>Calendar</span>
             </a>
         </li>

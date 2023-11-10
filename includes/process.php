@@ -512,11 +512,21 @@ if (isset($_POST['AddCase'])) {
     $ViolationID = $conn->real_escape_string($_POST['ViolationID']);
     $Status = $conn->real_escape_string($_POST['Status']);
     $Description = $conn->real_escape_string($_POST['Description']);
+    $TrialDate = $conn->real_escape_string($_POST['TrialDate']);
+    $HearingDate = $conn->real_escape_string($_POST['HearingDate']);
+    $Verdict = $conn->real_escape_string($_POST['Verdict']);
+    $Sentence = $conn->real_escape_string($_POST['Sentence']);
 
-    $query = "INSERT INTO `cases`( `CaseNo`, `AuthorID`, `AccusedID`, `ViolationID`, `Status`, `Description`) VALUES(?,?,?,?,?,?)";
+    $query = "INSERT INTO `cases`( `CaseNo`, `AuthorID`, `AccusedID`, `ViolationID`, `Status`, `Description`, `TrialDate`, `HearingDate`, `Verdict`, `Sentence`) VALUES(?,?,?,?,?,?,?,?,?,?)";
     try {
-        $result = $conn->execute_query($query, [$CaseNo, $AuthorID, $AccusedID, $ViolationID, $Status, $Description]);
+        $result = $conn->execute_query($query, [$CaseNo, $AuthorID, $AccusedID, $ViolationID, $Status, $Description, $TrialDate, $HearingDate, $Verdict, $Sentence]);
         if ($result) {
+
+            $id = $conn->insert_id;
+            $result2 = $conn->query("SELECT * FROM cases c LEFT JOIN accused a ON c.AccusedID=a.id WHERE c.id=$id");
+            while ($row = $result2->fetch_object()) {
+                sendEmail($row->Email, 'HOJ - Case Filed', "Hello " . $row->FirstName . " " . $row->LastName . ",\n\nI hope this email finds you well. We would like to inform you of the upcoming hearing for your case with the following details:\n\nCase Number: " . $CaseNo . "\nDate: " . $HearingDate . "\nTime: 8:30 AM\n\n\nPlease make sure to arrive at least 10 minutes before the scheduled time. If you have any questions or concerns, please don't hesitate to contact this email.\n\nYour presence at the hearing is crucial, and we appreciate your cooperation in this matter. If, for any reason, you are unable to attend, please notify us as soon as possible.\n\nThank you for your attention to this matter, and we look forward to the resolution of your case.\n\nSincerely, HOJ Admin\nHall of Justice");
+            }
 
             $response['status'] = 'success';
             $response['message'] = 'Case Inserted!';
