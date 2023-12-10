@@ -16,7 +16,7 @@ function sendEmail($sendTo, $subject, $content)
     $mail->Port = 587;
     $mail->SMTPAuth = true;
     $mail->Username = 'phpmailer720@gmail.com';
-    $mail->Password = 'gqqwrfsekxkkkuwl';
+    $mail->Password = 'dkycqaguqdiszpky';
     $mail->SMTPSecure = 'tls';
 
     $mail->setFrom('phpmailer720@gmail.com', 'HOJ Administrator');
