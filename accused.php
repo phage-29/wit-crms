@@ -178,6 +178,7 @@ require_once "components/header.php";
                                                 <td class="text-nowrap"><?= $row->Address ?></td>
                                                 <td class="text-center text-nowrap">
                                                     <button class='upd-btn btn btn-success btn-sm rounded-0 mx-1' data-editAccused="<?= $row->id ?>" data-toggle="collapse" data-target="#collapseEditAccused" aria-expanded="false" aria-controls="collapseEditAccused"><i class="fas fa-edit"></i></button>
+                                                    <button class='upd-btn btn btn-primary btn-sm rounded-0 mx-1' data-editAccused="<?= $row->id ?>" data-toggle="modal" data-target="#certificates" aria-expanded="false" aria-controls="collapseEditAccused"><i class="fas fa-edit"></i></button>
                                                 </td>
                                             </tr>
                                         <?php

@@ -175,6 +175,7 @@ require_once "components/header.php";
                                             <th>Case</th>
                                             <th>Violation</th>
                                             <th>Status</th>
+                                            <th>Archived Date</th>
                                             <th>Action</th>
                                         </tr>
                                     </thead>
@@ -187,7 +188,8 @@ require_once "components/header.php";
                                             CONCAT(a.`FirstName` , ' ' , a.`LastName`) as Name,
                                             v.`Case`,
                                             v.`Violation`,
-                                            c.`Status`
+                                            c.`Status`,
+                                            c.`UpdatedAt`
                                         FROM cases c
                                             LEFT JOIN users u ON c.`AuthorID` = c.id
                                             LEFT JOIN accused a ON c.`AccusedID` = a.id
@@ -202,6 +204,7 @@ require_once "components/header.php";
                                                 <td class="text-nowrap"><?= $row->Case ?></td>
                                                 <td class="text-nowrap"><?= $row->Violation ?></td>
                                                 <td class="text-nowrap"><?= $row->Status ?></td>
+                                                <td class="text-nowrap"><?= date_format(date_create($row->UpdatedAt),'Y-m-d') ?></td>
                                                 <td class="text-center text-nowrap">
                                                     <button class='upd-btn btn btn-success btn-sm rounded-0 mx-1' data-editcase="<?= $row->id ?>" data-toggle="collapse" data-target="#collapseEditCase" aria-expanded="false" aria-controls="collapseEditCase"><i class="fas fa-edit"></i></button>
                                                 </td>

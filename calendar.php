@@ -49,6 +49,14 @@ require_once "components/header.php";
                                             center: 'title',
                                             right: 'dayGridMonth,dayGridWeek'
                                         },
+                                        select: function (arg) {
+                                            alert("Add" + arg.id);
+                                            $('#AddModal').modal('show');
+                                        },
+                                        eventClick: function (arg) {
+                                            alert("Add" + arg.id);
+                                            $('#ViewModal').modal('show');
+                                        },
                                         height: 'auto',
                                         navLinks: true, // can click day/week names to navigate views
                                         editable: true,
@@ -57,12 +65,13 @@ require_once "components/header.php";
                                         nowIndicator: true,
                                         events: [
                                             <?php
-                                            $result = $conn->query("SELECT * FROM cases");
+                                            $result = $conn->query("SELECT * FROM hearings");
                                             while ($row = $result->fetch_object()) {
                                                 ?>
-                                                {
-                                                    title: '<?= $row->CaseNo ?>',
-                                                    start: '<?= $row->HearingDate ?>',
+                                                                    {
+                                                    id: '<?= $row->id ?>',
+                                                    title: '<?= $row->Remarks ?>',
+                                                    start: '<?= $row->Schedule ?>',
                                                 },
                                                 <?php
                                             }
@@ -84,11 +93,55 @@ require_once "components/header.php";
             </div>
             <!-- End of Main Content -->
 
+            <!-- Modal -->
+            <div class="modal fade" id="ViewModal" tabindex="-1" role="dialog" aria-labelledby="ViewModalTitle"
+                aria-hidden="true">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="ViewModalTitle">View</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body">
+                            Case
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                            <button type="button" class="btn btn-primary">Save changes</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- Modal -->
+            <div class="modal fade" id="AddModal" tabindex="-1" role="dialog" aria-labelledby="AddModalTitle"
+                aria-hidden="true">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="AddModalTitle">Add</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body">
+                            ...
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                            <button type="button" class="btn btn-primary">Save changes</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
             <!-- Footer -->
             <footer class="sticky-footer bg-white">
                 <div class="container my-auto">
                     <div class="copyright text-center my-auto">
-                        <span>Copyright &copy; <?= $website ?> 2020</span>
+                        <span>Copyright &copy;
+                            <?= $website ?> 2020
+                        </span>
                     </div>
                 </div>
             </footer>

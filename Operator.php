@@ -253,7 +253,7 @@ require_once "components/header.php";
                                             $result = $conn->query("SELECT * FROM cases");
                                             while ($row = $result->fetch_object()) {
                                                 ?>
-                                                    {
+                                                                        {
                                                     title: '<?= $row->CaseNo ?>',
                                                     start: '<?= $row->HearingDate ?>',
                                                 },
@@ -277,12 +277,39 @@ require_once "components/header.php";
 
             </div>
             <!-- End of Main Content -->
+            <form method="post" action="#" id="printJS-form">
+                <div class="container mt-5">
+                    <div class="row">
+                        <div class="col-md-6 offset-md-3">
+                            <div class="card">
+                                <div class="card-body">
+                                    <h5 class="card-title text-center">&emsp;CERTIFICATION</h5>
+                                    <p class="card-text">To Whom It May Concern:</p>
+                                    <p class="card-text">This is to certify that Mr./Ms <strong>[Name]</strong> is not
+                                        the same person with the Accused person who has a criminal record.</p>
+                                    <div class="text-right">
+                                        __________________
+                                    </div>
+                                    <div class="text-right">
+                                        Signature
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </form>
 
+            <button type="button" onclick="printJS({printable: base64, type: 'pdf', base64: true})">
+                Print Form
+            </button>
             <!-- Footer -->
             <footer class="sticky-footer bg-white">
                 <div class="container my-auto">
                     <div class="copyright text-center my-auto">
-                        <span>Copyright &copy; <?= $website ?> 2020</span>
+                        <span>Copyright &copy;
+                            <?= $website ?> 2020
+                        </span>
                     </div>
                 </div>
             </footer>

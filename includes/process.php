@@ -695,6 +695,42 @@ if (isset($_GET['DeleteDocument'])) {
     }
 }
 
+
+if (isset($_POST['AddHearing'])) {
+    $File = $_FILES['File']['name'];
+    $extension = pathinfo($File, PATHINFO_EXTENSION);
+    $Document = $conn->real_escape_string($_POST['Document']);
+    $Case = $conn->real_escape_string($_POST['Case']);
+    $Description = $conn->real_escape_string($_POST['Description']);
+
+    $FileName = uniqid() . '.' . $extension;
+    $FileTmp = $_FILES['File']['tmp_name'];
+    $Destination = 'uploads/' . $FileName;
+
+    if (move_uploaded_file($FileTmp, $Destination)) {
+        $query = "INSERT INTO `documents`( `Document`, `Description`, `FilePath`, `CaseNum`) VALUES(?,?,?,?)";
+        try {
+            $result = $conn->execute_query($query, [$Document, $Description, $Destination, $Case]);
+            if ($result) {
+
+                $response['status'] = 'success';
+                $response['message'] = 'Document Inserted!';
+                $response['redirect'] = '../managedocuments.php';
+            } else {
+
+                $response['status'] = 'error';
+                $response['message'] = 'Registration failed!';
+            }
+        } catch (Exception $e) {
+            $response['status'] = 'error';
+            $response['message'] = $e->getMessage();
+        }
+    } else {
+        $response['status'] = 'error';
+        $response['message'] = 'Failed to upload file!';
+    }
+}
+
 $responseJSON = json_encode($response);
 
 echo $responseJSON;
