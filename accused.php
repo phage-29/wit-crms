@@ -177,8 +177,107 @@ require_once "components/header.php";
                                                 <td class="text-nowrap"><?= $row->Email ?></td>
                                                 <td class="text-nowrap"><?= $row->Address ?></td>
                                                 <td class="text-center text-nowrap">
-                                                    <button class='upd-btn btn btn-success btn-sm rounded-0 mx-1' data-editAccused="<?= $row->id ?>" data-toggle="collapse" data-target="#collapseEditAccused" aria-expanded="false" aria-controls="collapseEditAccused"><i class="fas fa-edit"></i></button>
-                                                    <button class='upd-btn btn btn-primary btn-sm rounded-0 mx-1' data-editAccused="<?= $row->id ?>" data-toggle="modal" data-target="#certificates" aria-expanded="false" aria-controls="collapseEditAccused"><i class="fas fa-edit"></i></button>
+
+                                                    <div class="dropdown show">
+                                                        <button class="upd-btn btn btn-success btn-sm rounded-0 mx-1" data-editAccused="<?= $row->id ?>" data-toggle="collapse" data-target="#collapseEditAccused" aria-expanded="false" aria-controls="collapseEditAccused" title="Edit Accused">
+                                                            <i class="fas fa-edit"></i>
+                                                        </button>
+
+                                                        <div class="btn-group" role="group">
+                                                            <a class="upd-btn btn btn-outline-primary btn-sm rounded-0 mx-1" href="#" id="printDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" title="Print Options">
+                                                                <i class="fas fa-print"></i>
+                                                            </a>
+                                                            <div class="dropdown-menu" aria-labelledby="printDropdownMenuLink">
+                                                                <a class="dropdown-item" href="#" onclick="printJS('c<?= $row->AccusedID ?>1', 'html')">Not the same person</a>
+                                                                <a class="dropdown-item" href="#" onclick="printJS('c<?= $row->AccusedID ?>2', 'html')">Have a criminal record</a>
+                                                                <a class="dropdown-item" href="#" onclick="printJS('c<?= $row->AccusedID ?>3', 'html')">Has no criminal record</a>
+                                                            </div>
+                                                        </div>
+
+                                                        <div class="btn-group" role="group">
+                                                            <a class="upd-btn btn btn-primary btn-sm rounded-0 mx-1" href="#" id="downloadDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" title="Download Options">
+                                                                <i class="fas fa-download"></i>
+                                                            </a>
+                                                            <div class="dropdown-menu" aria-labelledby="downloadDropdownMenuLink">
+                                                                <a class="dropdown-item" href="#" onclick="downloadJS('#c<?= $row->AccusedID ?>1')">Not the same person</a>
+                                                                <a class="dropdown-item" href="#" onclick="downloadJS('#c<?= $row->AccusedID ?>2')">Have a criminal record</a>
+                                                                <a class="dropdown-item" href="#" onclick="downloadJS('#c<?= $row->AccusedID ?>3')">Has no criminal record</a>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+
+                                                    <div hidden>
+
+                                                        <div id="c<?= $row->AccusedID ?>1">
+                                                            <div style="font-family: 'Arial', sans-serif; margin: 20px;">
+                                                                <p style="text-align: end; margin-top: 20px;">Date: <?= date('d/m/Y') ?></p>
+
+                                                                <div style="text-align: center; font-size: 1.2em; font-weight: bold; margin-bottom: 20px;">CERTIFICATION</div>
+
+                                                                <p style="text-align: justify; margin-bottom: 10px;">
+                                                                    To Whom It May Concern:<br><br>
+                                                                    &emsp;&emsp;This is to certify that Mr./Ms <strong><?= $row->FirstName ?> <?= $row->LastName ?></strong> is not the same person with the Accused person who has a criminal record.
+                                                                </p>
+
+                                                                <p style="text-align: end; margin-top: 20px; font-style: italic;">______________</p>
+                                                                <p style="text-align: end; margin-top: 20px; margin-right:30px; font-style: italic;">Signature</p>
+                                                            </div>
+
+                                                        </div style="position:absolute">
+
+                                                        <button type="button" onclick="printJS('c<?= $row->AccusedID ?>1', 'html')">
+                                                            Print Form
+                                                        </button>
+                                                        <button type="button" onclick="downloadJS('#c<?= $row->AccusedID ?>1')">
+                                                            Download Form
+                                                        </button>
+                                                        <div id="c<?= $row->AccusedID ?>2">
+                                                            <div style="font-family: 'Arial', sans-serif; margin: 20px;">
+                                                                <p style="text-align: end; margin-top: 20px;">Date: <?= date('d/m/Y') ?></p>
+
+                                                                <div style="text-align: center; font-size: 1.2em; font-weight: bold; margin-bottom: 20px;">CERTIFICATION</div>
+
+                                                                <p style="text-align: justify; margin-bottom: 10px;">
+                                                                    To Whom It May Concern:<br><br>
+                                                                    &emsp;&emsp;This is to certify that Mr./Ms <strong><?= $row->FirstName ?> <?= $row->LastName ?></strong> have criminal record.
+                                                                </p>
+
+                                                                <p style="text-align: end; margin-top: 20px; font-style: italic;">______________</p>
+                                                                <p style="text-align: end; margin-top: 20px; margin-right:30px; font-style: italic;">Signature</p>
+                                                            </div>
+
+                                                        </div>
+
+                                                        <button type="button" onclick="printJS('c<?= $row->AccusedID ?>2', 'html')">
+                                                            Print Form
+                                                        </button>
+                                                        <button type="button" onclick="downloadJS('#c<?= $row->AccusedID ?>2')">
+                                                            Download Form
+                                                        </button>
+                                                        <div id="c<?= $row->AccusedID ?>3">
+                                                            <div style="font-family: 'Arial', sans-serif; margin: 20px;">
+                                                                <p style="text-align: end; margin-top: 20px;">Date: <?= date('d/m/Y') ?></p>
+
+                                                                <div style="text-align: center; font-size: 1.2em; font-weight: bold; margin-bottom: 20px;">CERTIFICATION</div>
+
+                                                                <p style="text-align: justify; margin-bottom: 10px;">
+                                                                    To Whom It May Concern:<br><br>
+                                                                    &emsp;&emsp;This is to certify that Mr./Ms <strong><?= $row->FirstName ?> <?= $row->LastName ?></strong> has no criminal record.
+                                                                </p>
+
+                                                                <p style="text-align: end; margin-top: 20px; font-style: italic;">______________</p>
+                                                                <p style="text-align: end; margin-top: 20px; margin-right:30px; font-style: italic;">Signature</p>
+                                                            </div>
+
+                                                        </div>
+
+                                                        <button type="button" onclick="printJS('c<?= $row->AccusedID ?>3', 'html')">
+                                                            Print Form
+                                                        </button>
+                                                        <button type="button" onclick="downloadJS('#c<?= $row->AccusedID ?>3')">
+                                                            Download Form
+                                                        </button>
+                                                    </div>
                                                 </td>
                                             </tr>
                                         <?php
@@ -196,6 +295,27 @@ require_once "components/header.php";
             </div>
             <!-- End of Main Content -->
 
+            <script>
+                function downloadJS(cert) {
+                    window.jsPDF = window.jspdf.jsPDF;
+
+                    var doc = new jsPDF();
+
+                    // Source HTMLElement or a string containing HTML.
+                    var elementHTML = document.querySelector(cert);
+
+                    doc.html(elementHTML, {
+                        callback: function(doc) {
+                            // Save the PDF
+                            doc.save(cert + '.pdf');
+                        },
+                        x: 15,
+                        y: 15,
+                        width: 170, // target width in the PDF document
+                        windowWidth: 650 // window width in CSS pixels
+                    });
+                }
+            </script>
             <!-- Footer -->
             <footer class="sticky-footer bg-white">
                 <div class="container my-auto">

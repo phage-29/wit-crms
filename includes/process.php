@@ -89,6 +89,7 @@ if (isset($_POST['Login'])) {
 
                     $response['status'] = 'error';
                     $response['message'] = 'Expired Temporary Password!';
+                    session_unset();
                 } else {
                     if (password_verify($Password, $_SESSION['HashedPassword'])) {
 
@@ -122,7 +123,6 @@ if (isset($_POST['Login'])) {
                     $response['status'] = 'error';
                     $response['message'] = 'Invalid Password!';
                 }
-
             }
         } else {
 
@@ -290,7 +290,7 @@ if (isset($_POST['AddAccused'])) {
 
             $response['status'] = 'success';
             $response['message'] = 'Accused Inserted!';
-            $response['redirect'] = '../manageaccused.php';
+            $response['redirect'] = $_SESSION['Role'] == 'Admin' ? '../manage' : '../' . 'accused.php';
         } else {
 
             $response['status'] = 'error';
@@ -319,7 +319,7 @@ if (isset($_POST['UpdateAccused'])) {
 
             $response['status'] = 'success';
             $response['message'] = 'Accused Updated!';
-            $response['redirect'] = '../manageaccused.php';
+            $response['redirect'] = $_SESSION['Role'] == 'Admin' ? '../manage' : '../' . 'accused.php';
         } else {
 
             $response['status'] = 'error';
@@ -340,7 +340,7 @@ if (isset($_GET['DeleteAccused'])) {
 
             $response['status'] = 'success';
             $response['message'] = 'Accused Deleted!';
-            $response['redirect'] = '../manageaccused.php';
+            $response['redirect'] = $_SESSION['Role'] == 'Admin' ? '../manage' : '../' . 'accused.php';
         } else {
 
             $response['status'] = 'error';
@@ -374,7 +374,7 @@ if (isset($_POST['AddUser'])) {
 
             $response['status'] = 'success';
             $response['message'] = 'New User Inserted!';
-            $response['redirect'] = '../manageusers.php';
+            $response['redirect'] = $_SESSION['Role'] == 'Admin' ? '../manage' : '../' . 'users.php';
         } else {
 
             $response['status'] = 'error';
@@ -402,7 +402,7 @@ if (isset($_POST['UpdateUser'])) {
 
             $response['status'] = 'success';
             $response['message'] = 'User Updated!';
-            $response['redirect'] = '../manageusers.php';
+            $response['redirect'] = $_SESSION['Role'] == 'Admin' ? '../manage' : '../' . 'users.php';
         } else {
 
             $response['status'] = 'error';
@@ -423,7 +423,7 @@ if (isset($_GET['DeleteUser'])) {
 
             $response['status'] = 'success';
             $response['message'] = 'User Deleted!';
-            $response['redirect'] = '../manageusers.php';
+            $response['redirect'] = $_SESSION['Role'] == 'Admin' ? '../manage' : '../' . 'users.php';
         } else {
 
             $response['status'] = 'error';
@@ -449,7 +449,7 @@ if (isset($_GET['ResetPassword'])) {
 
             $response['status'] = 'success';
             $response['message'] = 'Temporary Password sent!';
-            $response['redirect'] = '../manageusers.php';
+            $response['redirect'] = $_SESSION['Role'] == 'Admin' ? '../manage' : '../' . 'users.php';
         }
     } else {
 
@@ -472,7 +472,7 @@ if (isset($_POST['AddViolation'])) {
 
             $response['status'] = 'success';
             $response['message'] = 'Violation Inserted!';
-            $response['redirect'] = '../manageviolations.php';
+            $response['redirect'] = $_SESSION['Role'] == 'Admin' ? '../manage' : '../' . 'violations.php';
         } else {
 
             $response['status'] = 'error';
@@ -497,7 +497,7 @@ if (isset($_POST['UpdateViolation'])) {
 
             $response['status'] = 'success';
             $response['message'] = 'Violation Updated!';
-            $response['redirect'] = '../manageviolations.php';
+            $response['redirect'] = $_SESSION['Role'] == 'Admin' ? '../manage' : '../' . 'violations.php';
         } else {
 
             $response['status'] = 'error';
@@ -518,7 +518,7 @@ if (isset($_GET['DeleteViolation'])) {
 
             $response['status'] = 'success';
             $response['message'] = 'Violation Deleted!';
-            $response['redirect'] = '../manageviolations.php';
+            $response['redirect'] = $_SESSION['Role'] == 'Admin' ? '../manage' : '../' . 'violations.php';
         } else {
 
             $response['status'] = 'error';
@@ -556,7 +556,7 @@ if (isset($_POST['AddCase'])) {
 
             $response['status'] = 'success';
             $response['message'] = 'Case Inserted!';
-            $response['redirect'] = '../managecases.php';
+            $response['redirect'] = $_SESSION['Role'] == 'Admin' ? '../manage' : '../' . 'cases.php';
         } else {
 
             $response['status'] = 'error';
@@ -581,7 +581,7 @@ if (isset($_POST['EditCase'])) {
 
             $response['status'] = 'success';
             $response['message'] = 'Case Updated!';
-            $response['redirect'] = '../managecases.php';
+            $response['redirect'] = $_SESSION['Role'] == 'Admin' ? '../manage' : '../' . 'cases.php';
         } else {
 
             $response['status'] = 'error';
@@ -602,7 +602,7 @@ if (isset($_GET['DeleteCase'])) {
 
             $response['status'] = 'success';
             $response['message'] = 'Case Deleted!';
-            $response['redirect'] = '../managecases.php';
+            $response['redirect'] = $_SESSION['Role'] == 'Admin' ? '../manage' : '../' . 'cases.php';
         } else {
 
             $response['status'] = 'error';
@@ -634,7 +634,7 @@ if (isset($_POST['AddDocument'])) {
 
                 $response['status'] = 'success';
                 $response['message'] = 'Document Inserted!';
-                $response['redirect'] = '../managedocuments.php';
+                $response['redirect'] = $_SESSION['Role'] == 'Admin' ? '../manage' : '../' . 'documents.php';
             } else {
 
                 $response['status'] = 'error';
@@ -662,7 +662,7 @@ if (isset($_POST['UpdateDocument'])) {
 
             $response['status'] = 'success';
             $response['message'] = 'Document Updated!';
-            $response['redirect'] = '../managedocuments.php';
+            $response['redirect'] = $_SESSION['Role'] == 'Admin' ? '../manage' : '../' . 'documents.php';
         } else {
 
             $response['status'] = 'error';
@@ -683,7 +683,7 @@ if (isset($_GET['DeleteDocument'])) {
 
             $response['status'] = 'success';
             $response['message'] = 'Document Deleted!';
-            $response['redirect'] = '../managedocuments.php';
+            $response['redirect'] = $_SESSION['Role'] == 'Admin' ? '../manage' : '../' . 'documents.php';
         } else {
 
             $response['status'] = 'error';
@@ -697,37 +697,27 @@ if (isset($_GET['DeleteDocument'])) {
 
 
 if (isset($_POST['AddHearing'])) {
-    $File = $_FILES['File']['name'];
-    $extension = pathinfo($File, PATHINFO_EXTENSION);
-    $Document = $conn->real_escape_string($_POST['Document']);
-    $Case = $conn->real_escape_string($_POST['Case']);
-    $Description = $conn->real_escape_string($_POST['Description']);
+    $CaseNo = $conn->real_escape_string($_POST['CaseNo']);
+    $Venue = $conn->real_escape_string($_POST['Venue']);
+    $Schedule = $conn->real_escape_string($_POST['Schedule']);
+    $Remarks = $conn->real_escape_string($_POST['Remarks']);
 
-    $FileName = uniqid() . '.' . $extension;
-    $FileTmp = $_FILES['File']['tmp_name'];
-    $Destination = 'uploads/' . $FileName;
+    $query = "INSERT INTO `hearings`( `CaseNo`, `Venue`, `Schedule`, `Remarks`) VALUES(?,?,?,?)";
+    try {
+        $result = $conn->execute_query($query, [$CaseNo, $Venue, $Schedule, $Remarks]);
+        if ($result) {
 
-    if (move_uploaded_file($FileTmp, $Destination)) {
-        $query = "INSERT INTO `documents`( `Document`, `Description`, `FilePath`, `CaseNum`) VALUES(?,?,?,?)";
-        try {
-            $result = $conn->execute_query($query, [$Document, $Description, $Destination, $Case]);
-            if ($result) {
+            $response['status'] = 'success';
+            $response['message'] = 'Hearing Scheduled!';
+            $response['redirect'] = $_SESSION['Role'] == 'Admin' ? '../manage' : '../' . 'calendar.php';
+        } else {
 
-                $response['status'] = 'success';
-                $response['message'] = 'Document Inserted!';
-                $response['redirect'] = '../managedocuments.php';
-            } else {
-
-                $response['status'] = 'error';
-                $response['message'] = 'Registration failed!';
-            }
-        } catch (Exception $e) {
             $response['status'] = 'error';
-            $response['message'] = $e->getMessage();
+            $response['message'] = 'Registration failed!';
         }
-    } else {
+    } catch (Exception $e) {
         $response['status'] = 'error';
-        $response['message'] = 'Failed to upload file!';
+        $response['message'] = $e->getMessage();
     }
 }
 
@@ -747,9 +737,7 @@ $conn->close();
 
     <!-- Custom fonts for this template -->
     <link href="../vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
-    <link
-        href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
-        rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet">
 
     <!-- Custom styles for this template -->
     <link href="../css/sb-admin-2.min.css" rel="stylesheet">
@@ -776,7 +764,7 @@ $conn->close();
                 title: 'Success',
                 text: response.message,
                 icon: 'success',
-            }).then(function () {
+            }).then(function() {
                 // Redirect to the specified URL
                 window.location.href = response.redirect;
             });
@@ -785,7 +773,7 @@ $conn->close();
                 title: 'Error',
                 text: response.message,
                 icon: 'error',
-            }).then(function () {
+            }).then(function() {
                 // Redirect to the specified URL
                 history.back();
             });
@@ -794,7 +782,7 @@ $conn->close();
                 title: 'Error',
                 text: 'there is something wrong!',
                 icon: 'error',
-            }).then(function () {
+            }).then(function() {
                 // Redirect to the specified URL
                 history.back();
             });

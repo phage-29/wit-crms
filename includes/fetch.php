@@ -55,6 +55,16 @@ if (isset($_POST['EditDocument'])) {
         $data = $row;
     }
 }
+if (isset($_POST['ViewHearing'])) {
+    $id = $conn->real_escape_string($_POST['ViewHearing']);
+
+    $query = "SELECT * FROM `hearings` where id=?";
+    $result = $conn->execute_query($query, [$id]);
+
+    while ($row = $result->fetch_assoc()) {
+        $data = $row;
+    }
+}
 
 echo json_encode($data);
 

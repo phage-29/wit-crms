@@ -38,7 +38,7 @@ require_once "components/header.php";
                         <div class="card-body">
                             <p class="text-right">
                                 <button class="btn btn-outline-primary" type="button" data-toggle="collapse" data-target="#collapseAddCase" aria-expanded="false" aria-controls="collapseAddCase">
-                                    Add Violation
+                                    Add New Case
                                 </button>
                             </p>
                             <div class="collapse mb-3" id="collapseAddCase">
