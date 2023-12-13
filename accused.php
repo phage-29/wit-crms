@@ -294,28 +294,6 @@ require_once "components/header.php";
 
             </div>
             <!-- End of Main Content -->
-
-            <script>
-                function downloadJS(cert) {
-                    window.jsPDF = window.jspdf.jsPDF;
-
-                    var doc = new jsPDF();
-
-                    // Source HTMLElement or a string containing HTML.
-                    var elementHTML = document.querySelector(cert);
-
-                    doc.html(elementHTML, {
-                        callback: function(doc) {
-                            // Save the PDF
-                            doc.save(cert + '.pdf');
-                        },
-                        x: 15,
-                        y: 15,
-                        width: 170, // target width in the PDF document
-                        windowWidth: 650 // window width in CSS pixels
-                    });
-                }
-            </script>
             <!-- Footer -->
             <footer class="sticky-footer bg-white">
                 <div class="container my-auto">
