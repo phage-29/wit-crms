@@ -290,7 +290,7 @@ if (isset($_POST['AddAccused'])) {
 
             $response['status'] = 'success';
             $response['message'] = 'Accused Inserted!';
-            $response['redirect'] = $_SESSION['Role'] == 'Admin' ? '../manage/accused.php' : '../accused.php';
+            $response['redirect'] = $_SESSION['Role'] == 'Admin' ? '../manageaccused.php' : '../accused.php';
         } else {
 
             $response['status'] = 'error';
@@ -319,7 +319,7 @@ if (isset($_POST['UpdateAccused'])) {
 
             $response['status'] = 'success';
             $response['message'] = 'Accused Updated!';
-            $response['redirect'] = $_SESSION['Role'] == 'Admin' ? '../manage/accused.php' : '../accused.php';
+            $response['redirect'] = $_SESSION['Role'] == 'Admin' ? '../manageaccused.php' : '../accused.php';
         } else {
 
             $response['status'] = 'error';
@@ -340,7 +340,7 @@ if (isset($_GET['DeleteAccused'])) {
 
             $response['status'] = 'success';
             $response['message'] = 'Accused Deleted!';
-            $response['redirect'] = $_SESSION['Role'] == 'Admin' ? '../manage/accused.php' : '../accused.php';
+            $response['redirect'] = $_SESSION['Role'] == 'Admin' ? '../manageaccused.php' : '../accused.php';
         } else {
 
             $response['status'] = 'error';
@@ -374,7 +374,7 @@ if (isset($_POST['AddUser'])) {
 
             $response['status'] = 'success';
             $response['message'] = 'New User Inserted!';
-            $response['redirect'] = $_SESSION['Role'] == 'Admin' ? '../manage/users.php' : '../users.php';
+            $response['redirect'] = $_SESSION['Role'] == 'Admin' ? '../manageusers.php' : '../users.php';
         } else {
 
             $response['status'] = 'error';
@@ -402,7 +402,7 @@ if (isset($_POST['UpdateUser'])) {
 
             $response['status'] = 'success';
             $response['message'] = 'User Updated!';
-            $response['redirect'] = $_SESSION['Role'] == 'Admin' ? '../manage/users.php' : '../users.php';
+            $response['redirect'] = $_SESSION['Role'] == 'Admin' ? '../manageusers.php' : '../users.php';
         } else {
 
             $response['status'] = 'error';
@@ -423,7 +423,7 @@ if (isset($_GET['DeleteUser'])) {
 
             $response['status'] = 'success';
             $response['message'] = 'User Deleted!';
-            $response['redirect'] = $_SESSION['Role'] == 'Admin' ? '../manage/users.php' : '../users.php';
+            $response['redirect'] = $_SESSION['Role'] == 'Admin' ? '../manageusers.php' : '../users.php';
         } else {
 
             $response['status'] = 'error';
@@ -449,7 +449,7 @@ if (isset($_GET['ResetPassword'])) {
 
             $response['status'] = 'success';
             $response['message'] = 'Temporary Password sent!';
-            $response['redirect'] = $_SESSION['Role'] == 'Admin' ? '../manage/users.php' : '../users.php';
+            $response['redirect'] = $_SESSION['Role'] == 'Admin' ? '../manageusers.php' : '../users.php';
         }
     } else {
 
@@ -472,7 +472,7 @@ if (isset($_POST['AddViolation'])) {
 
             $response['status'] = 'success';
             $response['message'] = 'Violation Inserted!';
-            $response['redirect'] = $_SESSION['Role'] == 'Admin' ? '../manage/violations.php' : '../violations.php';
+            $response['redirect'] = '../manageviolations.php';
         } else {
 
             $response['status'] = 'error';
@@ -497,7 +497,7 @@ if (isset($_POST['UpdateViolation'])) {
 
             $response['status'] = 'success';
             $response['message'] = 'Violation Updated!';
-            $response['redirect'] = $_SESSION['Role'] == 'Admin' ? '../manage/violations.php' : '../violations.php';
+            $response['redirect'] = '../manageviolations.php';
         } else {
 
             $response['status'] = 'error';
@@ -518,7 +518,7 @@ if (isset($_GET['DeleteViolation'])) {
 
             $response['status'] = 'success';
             $response['message'] = 'Violation Deleted!';
-            $response['redirect'] = $_SESSION['Role'] == 'Admin' ? '../manage/violations.php' : '../violations.php';
+            $response['redirect'] = '../manageviolations.php';
         } else {
 
             $response['status'] = 'error';
@@ -556,7 +556,7 @@ if (isset($_POST['AddCase'])) {
 
             $response['status'] = 'success';
             $response['message'] = 'Case Inserted!';
-            $response['redirect'] = $_SESSION['Role'] == 'Admin' ? '../manage/cases.php' : '../cases.php';
+            $response['redirect'] = $_SESSION['Role'] == 'Admin' ? '../managecases.php' : '../cases.php';
         } else {
 
             $response['status'] = 'error';
@@ -581,7 +581,7 @@ if (isset($_POST['EditCase'])) {
 
             $response['status'] = 'success';
             $response['message'] = 'Case Updated!';
-            $response['redirect'] = $_SESSION['Role'] == 'Admin' ? '../manage/cases.php' : '../cases.php';
+            $response['redirect'] = $_SESSION['Role'] == 'Admin' ? '../managecases.php' : '../cases.php';
         } else {
 
             $response['status'] = 'error';
@@ -602,7 +602,7 @@ if (isset($_GET['DeleteCase'])) {
 
             $response['status'] = 'success';
             $response['message'] = 'Case Deleted!';
-            $response['redirect'] = $_SESSION['Role'] == 'Admin' ? '../manage/cases.php' : '../cases.php';
+            $response['redirect'] = $_SESSION['Role'] == 'Admin' ? '../managecases.php' : '../cases.php';
         } else {
 
             $response['status'] = 'error';
@@ -634,7 +634,7 @@ if (isset($_POST['AddDocument'])) {
 
                 $response['status'] = 'success';
                 $response['message'] = 'Document Inserted!';
-                $response['redirect'] = $_SESSION['Role'] == 'Admin' ? '../manage/documents.php' : '../documents.php';
+                $response['redirect'] = $_SESSION['Role'] == 'Admin' ? '../managedocuments.php' : '../documents.php';
             } else {
 
                 $response['status'] = 'error';
@@ -662,7 +662,7 @@ if (isset($_POST['UpdateDocument'])) {
 
             $response['status'] = 'success';
             $response['message'] = 'Document Updated!';
-            $response['redirect'] = $_SESSION['Role'] == 'Admin' ? '../manage/documents.php' : '../documents.php';
+            $response['redirect'] = $_SESSION['Role'] == 'Admin' ? '../managedocuments.php' : '../documents.php';
         } else {
 
             $response['status'] = 'error';
@@ -683,7 +683,7 @@ if (isset($_GET['DeleteDocument'])) {
 
             $response['status'] = 'success';
             $response['message'] = 'Document Deleted!';
-            $response['redirect'] = $_SESSION['Role'] == 'Admin' ? '../manage/documents.php' : '../documents.php';
+            $response['redirect'] = $_SESSION['Role'] == 'Admin' ? '../managedocuments.php' : '../documents.php';
         } else {
 
             $response['status'] = 'error';
@@ -709,7 +709,7 @@ if (isset($_POST['AddHearing'])) {
 
             $response['status'] = 'success';
             $response['message'] = 'Hearing Scheduled!';
-            $response['redirect'] = $_SESSION['Role'] == 'Admin' ? '../manage/calendar.php' : '../calendar.php';
+            $response['redirect'] = $_SESSION['Role'] == 'Admin' ? '../managecalendar.php' : '../calendar.php';
         } else {
 
             $response['status'] = 'error';
