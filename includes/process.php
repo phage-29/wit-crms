@@ -31,18 +31,25 @@ if (isset($_POST['ForgotPassword'])) {
 }
 
 if (isset($_GET['ResetPassword'])) {
-    $_SESSION['ChangePassword'] = substr(strtoupper(uniqid()), 0, 8);
-    $_SESSION['HashedPassword'] = password_hash($_SESSION['ChangePassword'], PASSWORD_DEFAULT);
-    $_SESSION['ExpiryPassword'] = time() + (2 * 60);
+    $userId = $_GET['ResetPassword'];
 
-    $query2 = "SELECT * FROM users WHERE `id` = ?";
-    $result2 = $conn->execute_query($query2, [$_GET['ResetPassword']]);
-    while ($row = $result2->fetch_object()) {
-        sendEmail($row->Email, 'HOJ Password Reset Request', "Hello " . $row->FirstName . " " . $row->LastName . ",\n\nWe received a request to reset your password. If you didn't make this request, you can ignore this email. Otherwise, please login using the provided password to reset your previous password:\n\nReset Password: " . $_SESSION['ChangePassword'] . "\n\nThe password will expire in 120 seconds.\n\nIf you have any questions or need further assistance, please don't hesitate to contact us.\n\nThank you for choosing our service!\n\nSincerely, HOJ Admin\nHall of Justice");
+    $ChangePassword = substr(strtoupper(uniqid()), 0, 8);
+    $HashedPassword = password_hash($ChangePassword, PASSWORD_DEFAULT);
+
+    $query = "SELECT * FROM users WHERE `id` = ?";
+    $result = $conn->execute_query($query, [$userId]);
+
+    if ($result->num_rows > 0) {
+        $row = $result->fetch_object();
+
+        sendEmail($row->Email, 'HOJ Password Reset Request', "Hello " . $row->FirstName . " " . $row->LastName . ",\n\nWe received a request to reset your password. If you didn't make this request, you can ignore this email. Otherwise, please login using the provided password to reset your previous password:\n\nReset Password: " . $ChangePassword . "\n\nThe password will expire in 120 seconds.\n\nIf you have any questions or need further assistance, please don't hesitate to contact us.\n\nThank you for choosing our service!\n\nSincerely, HOJ Admin\nHall of Justice");
 
         $response['status'] = 'success';
         $response['message'] = 'Temporary Password sent!';
         $response['redirect'] = $_SESSION['Role'] == 'Admin' ? '../manageusers.php' : '../users.php';
+    } else {
+        $response['status'] = 'error';
+        $response['message'] = 'User not found!';
     }
 }
 
