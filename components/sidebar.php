@@ -50,12 +50,12 @@
             </a>
         </li>
 
-        <li class="nav-item">
+        <!-- <li class="nav-item">
             <a class="nav-link" href="managedocuments.php">
-                <i class="fas fa-file"></i> <!-- Example icon for Accused Management -->
+                <i class="fas fa-file"></i>
                 <span>Documents</span>
             </a>
-        </li>
+        </li> -->
         <li class="nav-item">
             <a class="nav-link" href="managearchived.php">
                 <i class="fas fa-briefcase"></i> <!-- Example icon for Case Management -->
@@ -93,12 +93,12 @@
             </a>
         </li>
 
-        <li class="nav-item">
+        <!-- <li class="nav-item">
             <a class="nav-link" href="documents.php">
-                <i class="fas fa-file"></i> <!-- Example icon for Accused Management -->
+                <i class="fas fa-file"></i>
                 <span>Documents</span>
             </a>
-        </li>
+        </li> -->
         <li class="nav-item">
             <a class="nav-link" href="archived.php">
                 <i class="fas fa-briefcase"></i> <!-- Example icon for Case Management -->

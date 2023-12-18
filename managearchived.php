@@ -235,6 +235,7 @@ require_once "components/header.php";
                                             <th>Case</th>
                                             <th>Violation</th>
                                             <th>Status</th>
+                                            <th>Date Archived</th>
                                             <th>Action</th>
                                         </tr>
                                     </thead>
@@ -247,7 +248,8 @@ require_once "components/header.php";
                                             CONCAT(a.`FirstName` , ' ' , a.`LastName`) as Name,
                                             v.`Case`,
                                             v.`Violation`,
-                                            c.`Status`
+                                            c.`Status`,
+                                            c.`UpdatedAt`
                                         FROM cases c
                                             LEFT JOIN users u ON c.`AuthorID` = c.id
                                             LEFT JOIN accused a ON c.`AccusedID` = a.id
@@ -273,6 +275,9 @@ require_once "components/header.php";
                                                 </td>
                                                 <td class="text-nowrap">
                                                     <?= $row->Status ?>
+                                                </td>
+                                                <td class="text-nowrap">
+                                                    <?= date_format(date_create($row->UpdatedAt),'d/m/Y') ?>
                                                 </td>
                                                 <td class="text-center text-nowrap">
                                                     <button class='upd-btn btn btn-success btn-sm rounded-0 mx-1'

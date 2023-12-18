@@ -64,6 +64,28 @@ if (!is_null($acc->ChangePassword)) {
 }
 ?>
 
+
+<script>
+    function downloadJS(cert) {
+        window.jsPDF = window.jspdf.jsPDF;
+
+        var doc = new jsPDF();
+
+        // Source HTMLElement or a string containing HTML.
+        var elementHTML = document.querySelector(cert);
+
+        doc.html(elementHTML, {
+            callback: function(doc) {
+                // Save the PDF
+                doc.save(cert + '.pdf');
+            },
+            x: 15,
+            y: 15,
+            width: 170, // target width in the PDF document
+            windowWidth: 650 // window width in CSS pixels
+        });
+    }
+</script>
 <!-- Bootstrap core JavaScript-->
 <script src="vendor/jquery/jquery.min.js"></script>
 <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>

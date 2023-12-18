@@ -99,8 +99,7 @@ require_once "components/header.php";
                         <div class="col-xl-8 col-lg-7">
                             <div class="mb-3">
                                 <label for="caseNo" class="form-label">Case No.:</label>
-                                <input type="text" id="inputCaseNo" onkeyup="findCaseNo()" class="form-control w-50"
-                                    id="caseNo" />
+                                <input type="text" id="inputCaseNo" onkeyup="findCaseNo()" class="form-control w-50" id="caseNo" />
                             </div>
                             <div class="mb-3">
                                 <label for="violation" class="form-label">For:</label>
@@ -118,15 +117,13 @@ require_once "components/header.php";
                         <div class="col-xl-8 col-lg-7">
                             <div class="card shadow mb-4">
                                 <!-- Card Header - Dropdown -->
-                                <div
-                                    class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+                                <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
                                     <h6 class="m-0 font-weight-bold text-primary">Most Recent Cases</h6>
                                 </div>
                                 <!-- Card Body -->
                                 <div class="card-body">
                                     <div class="table-responsive">
-                                        <table class="table table-bordered table-hover" id="caseRecordsTable"
-                                            style="cursor:pointer" id="dataTable" width="100%" cellspacing="0">
+                                        <table class="table table-bordered table-hover" id="caseRecordsTable" style="cursor:pointer" id="dataTable" width="100%" cellspacing="0">
                                             <thead>
                                                 <tr>
                                                     <th class="text-nowrap">Case No</th>
@@ -150,9 +147,8 @@ require_once "components/header.php";
                                                 }
 
                                                 while ($row = $result->fetch_object()) {
-                                                    ?>
-                                                    <tr
-                                                        onclick="document.getElementById('Notes').innerHTML = '<?= $row->Notes ?>';document.getElementById('violation').value = '<?= $row->Violation ?>'">
+                                                ?>
+                                                    <tr onclick="document.getElementById('Notes').innerHTML = '<?= $row->Notes ?>';document.getElementById('violation').value = '<?= $row->Violation ?>'">
                                                         <td class="text-nowrap">
                                                             <?= $row->CaseNo ?>
                                                         </td>
@@ -179,7 +175,7 @@ require_once "components/header.php";
                                                         </td>
                                                         <!-- <td class="small text-center text-nowrap"><button class="small btn btn-primary" data-toggle="modal" data-target="#modalViolation<?= $row->id ?>">Edit</button> <button class="small btn btn-danger" onclick="location = confirm('Are you sure?') == true?'?deleteViolation=<?= $row->id ?>':'#'">Delete</button></td> -->
                                                     </tr>
-                                                    <?php
+                                                <?php
                                                 }
                                                 ?>
                                             </tbody>
@@ -212,8 +208,7 @@ require_once "components/header.php";
                         <div class="col-xl-4 col-lg-5">
                             <div class="card shadow mb-4">
                                 <!-- Card Header -->
-                                <div
-                                    class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+                                <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
                                     <h6 class="m-0 font-weight-bold text-primary">Notes</h6>
                                 </div>
                                 <!-- Card Body -->
@@ -223,86 +218,12 @@ require_once "components/header.php";
                             </div>
                         </div>
                     </div>
-                    <div class="card shadow mb-4">
-                        <!-- Card Header -->
-                        <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
-                            <h6 class="m-0 font-weight-bold text-primary">Calendar</h6>
-                        </div>
-                        <!-- Card Body -->
-                        <div class="card-body" id="Notes">
-                            <script>
-                                document.addEventListener('DOMContentLoaded', function () {
-                                    var calendarEl = document.getElementById('calendar');
-
-                                    var calendar = new FullCalendar.Calendar(calendarEl, {
-                                        initialDate: '<?= date('Y-m-d') ?>',
-                                        initialView: 'dayGridMonth',
-                                        headerToolbar: {
-                                            left: 'prev,next today',
-                                            center: 'title',
-                                            right: 'dayGridMonth,dayGridWeek'
-                                        },
-                                        height: 'auto',
-                                        navLinks: true, // can click day/week names to navigate views
-                                        editable: true,
-                                        selectable: true,
-                                        selectMirror: true,
-                                        nowIndicator: true,
-                                        events: [
-                                            <?php
-                                            $result = $conn->query("SELECT * FROM cases");
-                                            while ($row = $result->fetch_object()) {
-                                                ?>
-                                                                        {
-                                                    title: '<?= $row->CaseNo ?>',
-                                                    start: '<?= $row->HearingDate ?>',
-                                                },
-                                                <?php
-                                            }
-                                            ?>
-
-                                        ]
-                                    });
-
-                                    calendar.render();
-                                });
-
-                            </script>
-                            <div id='calendar'></div>
-                        </div>
-                    </div>
 
                 </div>
                 <!-- /.container-fluid -->
 
             </div>
             <!-- End of Main Content -->
-            <form method="post" action="#" id="printJS-form">
-                <div class="container mt-5">
-                    <div class="row">
-                        <div class="col-md-6 offset-md-3">
-                            <div class="card">
-                                <div class="card-body">
-                                    <h5 class="card-title text-center">&emsp;CERTIFICATION</h5>
-                                    <p class="card-text">To Whom It May Concern:</p>
-                                    <p class="card-text">This is to certify that Mr./Ms <strong>[Name]</strong> is not
-                                        the same person with the Accused person who has a criminal record.</p>
-                                    <div class="text-right">
-                                        __________________
-                                    </div>
-                                    <div class="text-right">
-                                        Signature
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </form>
-
-            <button type="button" onclick="printJS({printable: base64, type: 'pdf', base64: true})">
-                Print Form
-            </button>
             <!-- Footer -->
             <footer class="sticky-footer bg-white">
                 <div class="container my-auto">

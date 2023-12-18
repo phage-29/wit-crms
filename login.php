@@ -46,7 +46,7 @@ require_once "components/header.php";
                                     </form>
                                     <hr>
                                     <div class="text-center">
-                                        <a class="small" href="password.php">Forgot Password?</a>
+                                        <!-- <a class="small" href="password.php">Forgot Password?</a> -->
                                     </div>
                                     <div class="text-center">
                                         <!-- <a class="small" href="register.php">Create an Account!</a> -->
