@@ -2,7 +2,7 @@
 --
 -- Host: localhost    Database: hojdb
 -- ------------------------------------------------------
--- Server version	8.0.34
+-- Server version	8.0.35
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
@@ -24,21 +24,21 @@ DROP TABLE IF EXISTS `accused`;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `accused` (
   `id` int NOT NULL AUTO_INCREMENT,
-  `AccusedID` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
-  `FirstName` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
-  `MiddleName` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT NULL,
-  `LastName` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
-  `Sex` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
+  `AccusedID` varchar(255) COLLATE utf8mb4_general_ci NOT NULL,
+  `FirstName` varchar(255) COLLATE utf8mb4_general_ci NOT NULL,
+  `MiddleName` varchar(255) COLLATE utf8mb4_general_ci DEFAULT NULL,
+  `LastName` varchar(255) COLLATE utf8mb4_general_ci NOT NULL,
+  `Sex` varchar(255) COLLATE utf8mb4_general_ci NOT NULL,
   `DateOfBirth` date NOT NULL,
-  `Contact` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
-  `Email` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
-  `Address` text CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
-  `PhotoURL` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT NULL,
-  `NationalID` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT NULL,
-  `Occupation` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT NULL,
-  `Notes` text CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci,
+  `Contact` varchar(20) COLLATE utf8mb4_general_ci NOT NULL,
+  `Email` varchar(255) COLLATE utf8mb4_general_ci NOT NULL,
+  `Address` text COLLATE utf8mb4_general_ci NOT NULL,
+  `PhotoURL` varchar(255) COLLATE utf8mb4_general_ci DEFAULT NULL,
+  `NationalID` varchar(20) COLLATE utf8mb4_general_ci DEFAULT NULL,
+  `Occupation` varchar(255) COLLATE utf8mb4_general_ci DEFAULT NULL,
+  `Notes` text COLLATE utf8mb4_general_ci,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -50,22 +50,22 @@ DROP TABLE IF EXISTS `cases`;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `cases` (
   `id` int NOT NULL AUTO_INCREMENT,
-  `CaseNo` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
-  `Title` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT NULL,
-  `Description` text CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
+  `CaseNo` varchar(20) COLLATE utf8mb4_general_ci NOT NULL,
+  `Title` varchar(255) COLLATE utf8mb4_general_ci DEFAULT NULL,
+  `Description` text COLLATE utf8mb4_general_ci NOT NULL,
   `AuthorID` int NOT NULL,
   `AccusedID` int NOT NULL,
   `ViolationID` int NOT NULL,
   `FilingDate` date DEFAULT NULL,
-  `Branch` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT NULL,
-  `Status` enum('Filed','Under Investigation','On Trial','Closed','Convicted','Acquitted','Dismissed','Archived','Reopened') CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT NULL,
-  `Judge` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT NULL,
-  `Prosecutor` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT NULL,
-  `LeadInvestigator` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT NULL,
+  `Branch` varchar(100) COLLATE utf8mb4_general_ci DEFAULT NULL,
+  `Status` enum('Filed','Under Investigation','On Trial','Closed','Convicted','Acquitted','Dismissed','Archived','Reopened') COLLATE utf8mb4_general_ci DEFAULT NULL,
+  `Judge` varchar(100) COLLATE utf8mb4_general_ci DEFAULT NULL,
+  `Prosecutor` varchar(100) COLLATE utf8mb4_general_ci DEFAULT NULL,
+  `LeadInvestigator` varchar(100) COLLATE utf8mb4_general_ci DEFAULT NULL,
   `TrialDate` datetime DEFAULT NULL,
   `HearingDate` datetime DEFAULT NULL,
-  `Verdict` text CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci,
-  `Sentence` text CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci,
+  `Verdict` text COLLATE utf8mb4_general_ci,
+  `Sentence` text COLLATE utf8mb4_general_ci,
   `CreatedAt` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
   `UpdatedAt` timestamp NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`),
@@ -84,13 +84,13 @@ DROP TABLE IF EXISTS `documents`;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `documents` (
   `id` int NOT NULL AUTO_INCREMENT,
-  `Document` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
-  `Description` text CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci,
-  `FilePath` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
+  `Document` varchar(255) COLLATE utf8mb4_general_ci NOT NULL,
+  `Description` text COLLATE utf8mb4_general_ci,
+  `FilePath` varchar(255) COLLATE utf8mb4_general_ci NOT NULL,
   `CaseNum` int DEFAULT NULL,
   `CreatedAt` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -102,12 +102,12 @@ DROP TABLE IF EXISTS `hearings`;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `hearings` (
   `id` int NOT NULL AUTO_INCREMENT,
-  `CaseNo` varchar(255) DEFAULT NULL,
+  `CaseID` int DEFAULT NULL,
   `Venue` varchar(45) DEFAULT NULL,
-  `Schedule` date DEFAULT NULL,
-  `Remarks` varchar(255) DEFAULT NULL,
+  `Schedule` datetime DEFAULT NULL,
+  `Remarks` varchar(45) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -119,22 +119,23 @@ DROP TABLE IF EXISTS `users`;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `users` (
   `id` int NOT NULL AUTO_INCREMENT,
-  `FirstName` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
-  `MiddleName` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT NULL,
-  `LastName` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
-  `Email` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
-  `Username` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
-  `Password` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
-  `Status` enum('Active','Inactive') CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT 'Active',
-  `Role` enum('Admin','Operator') CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT 'Operator',
+  `FirstName` varchar(100) COLLATE utf8mb4_general_ci NOT NULL,
+  `MiddleName` varchar(100) COLLATE utf8mb4_general_ci DEFAULT NULL,
+  `LastName` varchar(100) COLLATE utf8mb4_general_ci NOT NULL,
+  `Email` varchar(100) COLLATE utf8mb4_general_ci NOT NULL,
+  `Username` varchar(50) COLLATE utf8mb4_general_ci NOT NULL,
+  `Password` varchar(255) COLLATE utf8mb4_general_ci NOT NULL,
+  `Status` enum('Active','Inactive') COLLATE utf8mb4_general_ci DEFAULT 'Active',
+  `Role` enum('Admin','Operator') COLLATE utf8mb4_general_ci DEFAULT 'Operator',
   `CreatedAt` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
-  `ChangePassword` varchar(45) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT NULL,
+  `ChangePassword` varchar(45) COLLATE utf8mb4_general_ci DEFAULT NULL,
+  `ExpiryPassword` bigint DEFAULT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `Email_UNIQUE` (`Email`),
   UNIQUE KEY `Username_UNIQUE` (`Username`),
   KEY `idx_Username` (`Username`),
   KEY `idx_Email` (`Email`)
-) ENGINE=InnoDB AUTO_INCREMENT=36 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=35 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -146,10 +147,10 @@ DROP TABLE IF EXISTS `violations`;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `violations` (
   `id` int NOT NULL AUTO_INCREMENT,
-  `Classification` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
-  `Case` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
-  `Violation` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
-  `Description` text CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci,
+  `Classification` varchar(255) COLLATE utf8mb4_general_ci NOT NULL,
+  `Case` varchar(255) COLLATE utf8mb4_general_ci NOT NULL,
+  `Violation` varchar(255) COLLATE utf8mb4_general_ci NOT NULL,
+  `Description` text COLLATE utf8mb4_general_ci,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=54 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -163,4 +164,4 @@ CREATE TABLE `violations` (
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2023-12-12 19:02:31
+-- Dump completed on 2023-12-19  0:32:02
