@@ -29,7 +29,7 @@ require_once "components/header.php";
                                                 name="Username" placeholder="Enter Username...">
                                         </div>
                                         <div class="form-group">
-                                            <input type="password" class="form-control form-control-user password"
+                                            <input type="password" pattern = "^(?=.*\d)(?=.*[a-zA-Z])[a-zA-Z\d]{8,}$" title="Must contain number and letter, and at least 8 or more characters" class="form-control form-control-user password"
                                                 id="Password" name="Password" placeholder="Password">
                                         </div>
                                         <div class="form-group">

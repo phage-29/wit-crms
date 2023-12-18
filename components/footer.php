@@ -37,11 +37,11 @@ if (!is_null($acc->ChangePassword)) {
                     <form class="user" action="includes/process.php" method="POST">
                         <div class="mb-3">
                             <label for="NewPassword" class="form-label">New Password</label>
-                            <input type="password" class="form-control" id="NewPassword" name="NewPassword" required>
+                            <input type="password" pattern = "^(?=.*\d)(?=.*[a-zA-Z])[a-zA-Z\d]{8,}$" title="Must contain number and letter, and at least 8 or more characters" class="form-control" id="NewPassword" name="NewPassword" required>
                         </div>
                         <div class="mb-3">
                             <label for="VerifyPassword" class="form-label">Confirm New Password</label>
-                            <input type="password" class="form-control" id="VerifyPassword" name="VerifyPassword" required>
+                            <input type="password" pattern = "^(?=.*\d)(?=.*[a-zA-Z])[a-zA-Z\d]{8,}$" title="Must contain number and letter, and at least 8 or more characters" class="form-control" id="VerifyPassword" name="VerifyPassword" required>
                         </div>
                         <hr>
                         <div class="mb-3">

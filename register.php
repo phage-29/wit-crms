@@ -39,10 +39,10 @@ require_once "components/header.php";
                                 </div>
                                 <div class="form-group row">
                                     <div class="col-sm-6 mb-3 mb-sm-0">
-                                        <input type="password" class="form-control form-control-user" id="Password" name="Password" placeholder="Password" required />
+                                        <input type="password" pattern = "^(?=.*\d)(?=.*[a-zA-Z])[a-zA-Z\d]{8,}$" title="Must contain number and letter, and at least 8 or more characters" class="form-control form-control-user" id="Password" name="Password" placeholder="Password" required />
                                     </div>
                                     <div class="col-sm-6">
-                                        <input type="password" class="form-control form-control-user" id="Verify" name="Verify" placeholder="Repeat Password" required />
+                                        <input type="password" pattern = "^(?=.*\d)(?=.*[a-zA-Z])[a-zA-Z\d]{8,}$" title="Must contain number and letter, and at least 8 or more characters" class="form-control form-control-user" id="Verify" name="Verify" placeholder="Repeat Password" required />
                                     </div>
                                 </div>
                                 <input type="hidden" name="Register" />
