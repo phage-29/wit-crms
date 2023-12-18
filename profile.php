@@ -1,6 +1,5 @@
 <?php
 $page = "Profile";
-$Role = "Admin";
 require_once "includes/session.php";
 require_once "components/header.php";
 ?>

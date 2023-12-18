@@ -10,16 +10,18 @@ $response = array();
 
 if (isset($_POST['ForgotPassword'])) {
     $Email = $conn->real_escape_string($_POST['Email']);
-    $_SESSION['ChangePassword'] = substr(strtoupper(uniqid()), 0, 8);
-    $_SESSION['HashedPassword'] = password_hash($_SESSION['ChangePassword'], PASSWORD_DEFAULT);
-    $_SESSION['ExpiryPassword'] = time() + (2 * 60);
+    $ChangePassword = substr(strtoupper(uniqid()), 0, 8);
+    $HashedPassword = password_hash($ChangePassword, PASSWORD_DEFAULT);
+    $ExpiryPassword = time() + (2 * 60);
+
+    $query = "UPDATE users SET ChangePassword = '$ChangePassword', HashedPassword = '$HashedPassword', ExpiryPassword = $ExpiryPassword WHERE Email = '$Email'";
 
     $query2 = "SELECT * FROM users WHERE `Email` = ?";
     $result2 = $conn->execute_query($query2, [$Email]);
 
     if ($result2->num_rows > 0) {
         $row = $result2->fetch_object();
-        sendEmail($row->Email, 'HOJ Password Reset Request', "Hello " . $row->FirstName . " " . $row->LastName . ",\n\nWe received a request to reset your password. If you didn't make this request, you can ignore this email. Otherwise, please login using the provided password to reset your previous password:\n\nReset Password: " . $_SESSION['ChangePassword'] . "\n\nThe password will expire in 120 seconds.\n\nIf you have any questions or need further assistance, please don't hesitate to contact us.\n\nThank you for choosing our service!\n\nSincerely, HOJ Admin\nHall of Justice");
+        sendEmail($row->Email, 'HOJ Password Reset Request', "Hello " . $row->FirstName . " " . $row->LastName . ",\n\nWe received a request to reset your password. If you didn't make this request, you can ignore this email. Otherwise, please login using the provided password to reset your previous password:\n\nReset Password: " . $ChangePassword . "\n\nThe password will expire in 120 seconds.\n\nIf you have any questions or need further assistance, please don't hesitate to contact us.\n\nThank you for choosing our service!\n\nSincerely, HOJ Admin\nHall of Justice");
 
         $response['status'] = 'success';
         $response['message'] = 'Temporary Password Sent!';
@@ -30,14 +32,16 @@ if (isset($_POST['ForgotPassword'])) {
     }
 }
 if (isset($_GET['ResetPassword'])) {
-    $_SESSION['ChangePassword'] = substr(strtoupper(uniqid()), 0, 8);
-    $_SESSION['HashedPassword'] = password_hash($_SESSION['ChangePassword'], PASSWORD_DEFAULT);
-    $_SESSION['ExpiryPassword'] = time() + (2 * 60);
+    $ChangePassword = substr(strtoupper(uniqid()), 0, 8);
+    $HashedPassword = password_hash($ChangePassword, PASSWORD_DEFAULT);
+    $ExpiryPassword = time() + (2 * 60);
+
+    $conn->query("UPDATE users SET `ChangePassword` = '$ChangePassword', `Password` = '$HashedPassword', `ExpiryPassword` = $ExpiryPassword WHERE `id` = '" . $_GET['ResetPassword'] . "'");
 
     $query2 = "SELECT * FROM users WHERE `id` = ?";
     $result2 = $conn->execute_query($query2, [$_GET['ResetPassword']]);
     while ($row = $result2->fetch_object()) {
-        sendEmail($row->Email, 'HOJ Password Reset Request', "Hello " . $row->FirstName . " " . $row->LastName . ",\n\nWe received a request to reset your password. If you didn't make this request, you can ignore this email. Otherwise, please login using the provided password to reset your previous password:\n\nReset Password: " . $_SESSION['ChangePassword'] . "\n\nThe password will expire in 120 seconds.\n\nIf you have any questions or need further assistance, please don't hesitate to contact us.\n\nThank you for choosing our service!\n\nSincerely, HOJ Admin\nHall of Justice");
+        sendEmail($row->Email, 'HOJ Password Reset Request', "Hello " . $row->FirstName . " " . $row->LastName . ",\n\nWe received a request to reset your password. If you didn't make this request, you can ignore this email. Otherwise, please login using the provided password to reset your previous password:\n\nReset Password: " . $ChangePassword . "\n\nThe password will expire in 120 seconds.\n\nIf you have any questions or need further assistance, please don't hesitate to contact us.\n\nThank you for choosing our service!\n\nSincerely, HOJ Admin\nHall of Justice");
 
         $response['status'] = 'success';
         $response['message'] = 'Temporary Password sent!';
@@ -99,17 +103,13 @@ if (isset($_POST['Login'])) {
             $row = $result->fetch_object();
 
 
-            if (isset($_SESSION['HashedPassword'])) {
-                if (isset($_SESSION['ExpiryPassword']) && time() > $_SESSION['ExpiryPassword']) {
+            if (!empty($row->ExpiryPassword)) {
+                if (time() > intval($row->ExpiryPassword)) {
 
                     $response['status'] = 'error';
                     $response['message'] = 'Expired Temporary Password!';
-                    unset($_SESSION["HashedPassword"]);
                 } else {
-                    if (password_verify($Password, $_SESSION['HashedPassword'])) {
-
-                        $query = "UPDATE users SET `Password` = ?, `ChangePassword` = ? WHERE `Username` = ?";
-                        $result = $conn->execute_query($query, [$_SESSION['HashedPassword'], $_SESSION['ChangePassword'], $Username]);
+                    if (password_verify($Password, $row->Password)) {
 
                         $_SESSION['Username'] = $Username;
                         $_SESSION['Role'] = $row->Role;
@@ -253,7 +253,7 @@ if (isset($_POST['ChangePassword'])) {
         if ($result && $result->num_rows === 1) {
             if ($NewPassword == $VerifyPassword) {
                 $HashedPassword = password_hash($NewPassword, PASSWORD_DEFAULT);
-                $query2 = "UPDATE `users` SET `Password` = ?, `ChangePassword` = NULL WHERE `Username` = ?";
+                $query2 = "UPDATE `users` SET `Password` = ?, `ChangePassword` = NULL, `ExpiryPassword` = NULL WHERE `Username` = ?";
                 try {
 
                     $result2 = $conn->execute_query($query2, [$HashedPassword, $_SESSION["Username"]]);
@@ -733,7 +733,9 @@ $conn->close();
 
     <!-- Custom fonts for this template -->
     <link href="../vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
-    <link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet">
+    <link
+        href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
+        rel="stylesheet">
 
     <!-- Custom styles for this template -->
     <link href="../css/sb-admin-2.min.css" rel="stylesheet">
@@ -760,7 +762,7 @@ $conn->close();
                 title: 'Success',
                 text: response.message,
                 icon: 'success',
-            }).then(function() {
+            }).then(function () {
                 // Redirect to the specified URL
                 window.location.href = response.redirect;
             });
@@ -769,7 +771,7 @@ $conn->close();
                 title: 'Error',
                 text: response.message,
                 icon: 'error',
-            }).then(function() {
+            }).then(function () {
                 // Redirect to the specified URL
                 history.back();
             });
@@ -778,7 +780,7 @@ $conn->close();
                 title: 'Error',
                 text: 'there is something wrong!',
                 icon: 'error',
-            }).then(function() {
+            }).then(function () {
                 // Redirect to the specified URL
                 history.back();
             });
