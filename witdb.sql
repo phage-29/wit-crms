@@ -1,6 +1,6 @@
 -- MySQL dump 10.13  Distrib 8.0.34, for Win64 (x86_64)
 --
--- Host: localhost    Database: witdb
+-- Host: localhost    Database: hojdb
 -- ------------------------------------------------------
 -- Server version	8.0.35
 
@@ -38,7 +38,7 @@ CREATE TABLE `accused` (
   `Occupation` varchar(255) COLLATE utf8mb4_general_ci DEFAULT NULL,
   `Notes` text COLLATE utf8mb4_general_ci,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=14 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -47,7 +47,6 @@ CREATE TABLE `accused` (
 
 LOCK TABLES `accused` WRITE;
 /*!40000 ALTER TABLE `accused` DISABLE KEYS */;
-INSERT INTO `accused` VALUES (12,'49109764','Robeert','Go','Gale','male','2001-12-23','4532707','reynamaecaculangan@gmail.com','San Juan',NULL,NULL,NULL,NULL),(13,'40404706','Collyne','Go','Samalburo','female','1999-12-03','09663101744','collynesamalburo@gmail.com','Oton',NULL,NULL,NULL,NULL);
 /*!40000 ALTER TABLE `accused` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -82,7 +81,7 @@ CREATE TABLE `cases` (
   KEY `cases_accused_idx` (`AccusedID`),
   KEY `cases_violations_idx` (`ViolationID`),
   KEY `cases_author_idx` (`AuthorID`)
-) ENGINE=InnoDB AUTO_INCREMENT=21 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -91,7 +90,6 @@ CREATE TABLE `cases` (
 
 LOCK TABLES `cases` WRITE;
 /*!40000 ALTER TABLE `cases` DISABLE KEYS */;
-INSERT INTO `cases` VALUES (18,'23-926446',NULL,'on trial',40,13,58,NULL,NULL,'On Trial',NULL,NULL,NULL,'0000-00-00 00:00:00','0000-00-00 00:00:00','','','2023-12-13 05:46:28','2023-12-13 05:46:28'),(19,'23-859760',NULL,'on trial',40,13,58,NULL,NULL,'Filed',NULL,NULL,NULL,'0000-00-00 00:00:00','0000-00-00 00:00:00','','','2023-12-13 05:46:34','2023-12-13 05:52:35'),(20,'23-908829',NULL,'lack evidence',40,12,55,NULL,NULL,'Under Investigation',NULL,NULL,NULL,'0000-00-00 00:00:00','0000-00-00 00:00:00','','','2023-12-13 05:48:53','2023-12-13 05:48:53');
 /*!40000 ALTER TABLE `cases` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -110,7 +108,7 @@ CREATE TABLE `documents` (
   `CaseNum` int DEFAULT NULL,
   `CreatedAt` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -131,12 +129,12 @@ DROP TABLE IF EXISTS `hearings`;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `hearings` (
   `id` int NOT NULL AUTO_INCREMENT,
-  `CaseNo` varchar(255) COLLATE utf8mb4_general_ci DEFAULT NULL,
-  `Venue` varchar(45) COLLATE utf8mb4_general_ci DEFAULT NULL,
-  `Schedule` date DEFAULT NULL,
-  `Remarks` varchar(255) COLLATE utf8mb4_general_ci DEFAULT NULL,
+  `CaseID` int DEFAULT NULL,
+  `Venue` varchar(45) DEFAULT NULL,
+  `Schedule` datetime DEFAULT NULL,
+  `Remarks` varchar(45) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -145,7 +143,6 @@ CREATE TABLE `hearings` (
 
 LOCK TABLES `hearings` WRITE;
 /*!40000 ALTER TABLE `hearings` DISABLE KEYS */;
-INSERT INTO `hearings` VALUES (4,'23-921540','dfghj','2023-12-06','yonu'),(5,'23-309886','iloilo','2023-12-07','1st trial'),(6,'23-309886','antique','2023-12-07','1st trial');
 /*!40000 ALTER TABLE `hearings` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -168,13 +165,13 @@ CREATE TABLE `users` (
   `Role` enum('Admin','Operator') COLLATE utf8mb4_general_ci DEFAULT 'Operator',
   `CreatedAt` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
   `ChangePassword` varchar(45) COLLATE utf8mb4_general_ci DEFAULT NULL,
-  `ExpiryPassword` time DEFAULT NULL,
+  `ExpiryPassword` bigint DEFAULT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `Email_UNIQUE` (`Email`),
   UNIQUE KEY `Username_UNIQUE` (`Username`),
   KEY `idx_Username` (`Username`),
   KEY `idx_Email` (`Email`)
-) ENGINE=InnoDB AUTO_INCREMENT=43 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=41 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -183,7 +180,7 @@ CREATE TABLE `users` (
 
 LOCK TABLES `users` WRITE;
 /*!40000 ALTER TABLE `users` DISABLE KEYS */;
-INSERT INTO `users` VALUES (1,'Juan','D.','Dela Cruz','admin@gmail.com','admin','$2y$10$nILI2nTmJ8t0xcMFGusyBu9fts/dB9XYwtNNZME7eQY3lN82rl7.K','Active','Admin','2023-10-27 14:53:34',NULL,NULL),(40,'Scottie','','Mupada','itzmescottie26@gmail.com','juan123','$2y$10$OTS/duWlXpO26zKJNQNo2uaBvpMejoV/nC/9r/EnYrA5c/6y7oTRK','Active','Operator','2023-12-13 05:39:23',NULL,NULL),(42,'Angel Mae','Patriarca','Rano','rano.angelmaepit2011@gmail.com','angel123','$2y$10$1rOXIOQkx2Vp4i4uzS24puEsgHG2JxOEqo96CT1ffD.G0L9LnNUOC','Active','Operator','2024-01-12 14:31:38','65A152F0','00:00:00');
+INSERT INTO `users` VALUES (18,'Juan','D.','Dela Cruz','dace.phage@gmail.com','admin','$2y$10$Ihujvgfut3OpNtA8N9UmpO4NmkNGSAvbbotNP24WHxzUUKre3KQn.','Active','Admin','2023-10-27 14:53:34',NULL,NULL),(19,'Scottie','','Mupada','itzmescottie26@gmail.com','juan123','$2y$10$OTS/duWlXpO26zKJNQNo2uaBvpMejoV/nC/9r/EnYrA5c/6y7oTRK','Active','Operator','2023-12-13 05:39:23',NULL,NULL),(20,'Angel Mae','Patriarca','Rano','rano.angelmaepit2011@gmail.com','angel123','$2y$10$OTS/duWlXpO26zKJNQNo2uaBvpMejoV/nC/9r/EnYrA5c/6y7oTRK','Active','Operator','2023-12-13 05:39:23',NULL,NULL);
 /*!40000 ALTER TABLE `users` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -201,7 +198,7 @@ CREATE TABLE `violations` (
   `Violation` varchar(255) COLLATE utf8mb4_general_ci NOT NULL,
   `Description` text COLLATE utf8mb4_general_ci,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=61 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=54 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -210,7 +207,7 @@ CREATE TABLE `violations` (
 
 LOCK TABLES `violations` WRITE;
 /*!40000 ALTER TABLE `violations` DISABLE KEYS */;
-INSERT INTO `violations` VALUES (55,'Family','32-34567','murder','idk'),(57,'Drug','23-23234','Homicide','asdfghjkl'),(58,'Family','23-232467','Child Abuse','asdfghjkl'),(59,'Drug','32-34567','sadasd','asdasd'),(60,'Regular','23-456782','Child Abuse','wqdudhgdku');
+INSERT INTO `violations` VALUES (25,'Family','Illegal Possession of Dangerous Drugs','Violation of Section 11 of Republic Act No. 9165','Prohibits the possession of dangerous drugs without a valid prescription or legal authority.'),(28,'Drugs','Manufacture of Dangerous Drugs','Violation of Section 8 of Republic Act No. 9165','Prohibits the manufacture of dangerous drugs and controlled precursors and essential chemicals.'),(29,'Drugs','Maintenance of a Drug Den','Violation of Section 6 of Republic Act No. 9165','Prohibits maintaining a place where illegal drugs are used or sold.'),(30,'Drugs','Possession or Use of a Dangerous Drug During Parties or Social Gatherings','Violation of Section 13 of Republic Act No. 9165','Pprohibits the possession or use of dangerous drugs during social gatherings or parties.'),(31,'Drugs','Illegal Drug Trafficking','Section 6 of Republic Act No. 9165','Covers the illegal trafficking, importation, exportation, trading, or distribution of dangerous drugs.'),(32,'Drugs','Cultivation or Culture of Plants Classified as Dangerous Drugs or are Sources Thereof','Violation of Section 16 of Republic Act No. 9165','Prohibits the cultivation or culture of plants classified as dangerous drugs or sources thereof, such as marijuana plants.'),(33,'Family','Violence Against Women and Their Children','Violation of Section 5 of Republic Act No. 9262','Prohibits any person from committing acts of violence against women and their children.'),(34,'Family','Child Abuse','Violation of Section 3(a) of Republic Act No. 7610','Prohibits child abuse, which includes physical, sexual, or emotional abuse, or neglect of children.'),(35,'Family','Bigamy','Violation of Article 349 of the Revised Penal Code','Prohibits entering into a second marriage while the first marriage is still valid and subsisting.'),(36,'Family','Adultery','Violation of Article 333 of the Revised Penal Code','Prohibits married individuals from engaging in sexual relations with someone other than their spouse.'),(37,'Family','Concubinage','Violation of Article 334 of the Revised Penal Code','Prohibits married men from maintaining a mistress in the conjugal dwelling.'),(38,'Family','Domestic Violence','Violation of VAWC Act, Republic Act No. 9262','Prohibits various forms of abuse against women and their children within a family or intimate relationship.'),(39,'Family','Child Custody Dispute','Legal dispute regarding child custody and visitation rights','May arise in cases of separation or divorce when parents cannot agree on child custody arrangements.'),(40,'Family','Annulment of Marriage','Legal process for dissolving a marriage based on specific grounds','May be pursued when a marriage is deemed void or voidable under Philippine family law.'),(41,'Regular','Theft','Violation of Article 308 of the Revised Penal Code','Involves the unlawful taking of another person\'s property without their consent and with the intent to gain.'),(42,'Regular','Robbery','Violation of Article 294 of the Revised Penal Code','Involves the use of violence or intimidation to take another person\'s property against their will.'),(43,'Regular','Estafa','Violation of Article 315 of the Revised Penal Code','Involves fraud or swindling, such as deceitful transactions, bouncing checks, or false pretenses.'),(44,'Regular','Homicide','Violation of Article 249 of the Revised Penal Code','Involves the unlawful killing of another person.'),(45,'Regular','Libel','Violation of Article 353 of the Revised Penal Code','Involves defamatory statements made in writing that harm a person\'s reputation.'),(46,'Regular','Contract Dispute','Civil dispute arising from a breach of contract','Involves disputes related to contract violations, enforcement, or termination.'),(49,'Regular','Torts','Civil case involving a personal injury claim','Involves civil wrongs or torts, such as negligence or personal injury claims.');
 /*!40000 ALTER TABLE `violations` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -223,4 +220,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2024-01-13 12:47:18
+-- Dump completed on 2024-01-13 12:52:14
